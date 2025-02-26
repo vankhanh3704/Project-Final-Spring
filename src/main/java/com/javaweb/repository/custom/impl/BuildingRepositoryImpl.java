@@ -2,8 +2,8 @@ package com.javaweb.repository.custom.impl;
 
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.enums.TypeCode;
-import com.javaweb.model.dto.AssignmentBuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
+import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.custom.BuildingRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.lang.reflect.Field;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -109,5 +108,15 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
     }
 
 
-
+    @Override
+    public int countTotalItem(BuildingSearchResponse buildingSearchResponse)
+    {
+        String sql = buildQueryFilter(buildingSearchResponse.getId());
+        Query query = entityManager.createNativeQuery(sql);
+        return query.getResultList().size();
+    }
+    private String buildQueryFilter(Long id) {
+        String sql = "SELECT * FROM building b where b.id = " + id;
+        return sql;
+    }
 }

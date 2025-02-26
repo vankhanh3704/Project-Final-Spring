@@ -1,5 +1,8 @@
 package com.javaweb.model.dto;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

@@ -25,14 +25,12 @@
                         <li>
                             <a href="/admin/profile-<%=SecurityUtils.getPrincipal().getUsername()%>">
                                 <i class="ace-icon fa fa-user"></i>
-                                <%--<spring:message code="label.account.information"/>--%>
                                 Thông tin tài khoản
                             </a>
                         </li>
                         <li>
                             <a href="<c:url value="/admin/profile-password"/>">
                                 <i class="ace-icon fa fa-key"></i>
-                                <%--<spring:message code="label.password.change"/>--%>
                                 Đổi mật khẩu
                             </a>
                         </li>

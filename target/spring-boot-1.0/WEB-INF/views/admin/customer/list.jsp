@@ -229,10 +229,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="btnassignmentCustomer">Giao khách hàng</button>
-                <button type="button" class="btn btn-default" id="">Đóng</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Đóng</button>
             </div>
         </div>
-
     </div>
 </div>
 <script>

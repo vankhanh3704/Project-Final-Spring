@@ -47,7 +47,7 @@
                         <div class="space-4"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">
-                                <%--<spring:message code="label.username"/>--%> Tên đăng nhập
+                                Tên đăng nhập
                             </label>
                             <div class="col-sm-9">
                                 <c:if test="${not empty model.id}">

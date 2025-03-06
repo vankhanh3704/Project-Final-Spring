@@ -1,4 +1,7 @@
 package com.javaweb.entity;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "building")
-
 public class BuildingEntity extends BaseEntity {
 
     @Column(name = "name")
@@ -88,7 +90,16 @@ public class BuildingEntity extends BaseEntity {
     @Column(name = "managerphone")
     private String managerPhone;
 
+    @Column(name = "avatar")
+    private String image;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
 
 //    @OneToMany(fetch = FetchType.LAZY,mappedly = "buildingEntity", cascade = (CascadeType.MERGE, CascadeType.PERSIST), orphanRemoval = true)
@@ -282,7 +293,7 @@ public class BuildingEntity extends BaseEntity {
         this.rentAreas = rentAreas;
     }
 
-    //
+
 //    public List<RentAreaEntity> getRentAreaEntities() {
 //        return rentAreaEntities;
 //    }
@@ -290,7 +301,7 @@ public class BuildingEntity extends BaseEntity {
 //    public void setRentAreaEntities(List<RentAreaEntity> rentAreaEntities) {
 //        this.rentAreaEntities = rentAreaEntities;
 //    }
-
+//
 //    public List<AssignBuildingEntity> getAssignBuildingEntities() {
 //        return assignBuildingEntities;
 //    }

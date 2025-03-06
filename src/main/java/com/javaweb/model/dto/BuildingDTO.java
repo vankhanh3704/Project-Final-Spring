@@ -1,10 +1,13 @@
 package com.javaweb.model.dto;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class BuildingDTO extends AbstractDTO{
+    private Long id;
     private String name;
     private Long floorArea;
     private String district;
@@ -19,6 +22,156 @@ public class BuildingDTO extends AbstractDTO{
     private String managerPhone;
     private List<String> typeCode;
     private String structure;
+    private String rentPriceDescription;
+    private String serviceFee;
+    private String carFee;
+    private String motorbikeFee;
+    private String extraFee;
+    private String electricFee;
+    private String deposit;
+    private String payment;
+    private String rentTime;
+    private String decorationTime;
+    private String brokerageFee;
+    private String note;
+    private String image;
+    private String imageBase64;
+    private String imageName;
+    
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRentPriceDescription() {
+        return rentPriceDescription;
+    }
+
+    public void setRentPriceDescription(String rentPriceDescription) {
+        this.rentPriceDescription = rentPriceDescription;
+    }
+
+    public String getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceFee(String serviceFee) {
+        this.serviceFee = serviceFee;
+    }
+
+    public String getCarFee() {
+        return carFee;
+    }
+
+    public void setCarFee(String carFee) {
+        this.carFee = carFee;
+    }
+
+    public String getMotorbikeFee() {
+        return motorbikeFee;
+    }
+
+    public void setMotorbikeFee(String motorbikeFee) {
+        this.motorbikeFee = motorbikeFee;
+    }
+
+    public String getExtraFee() {
+        return extraFee;
+    }
+
+    public void setExtraFee(String extraFee) {
+        this.extraFee = extraFee;
+    }
+
+    public String getElectricFee() {
+        return electricFee;
+    }
+
+    public void setElectricFee(String electricFee) {
+        this.electricFee = electricFee;
+    }
+
+    public String getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(String deposit) {
+        this.deposit = deposit;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
+    public String getRentTime() {
+        return rentTime;
+    }
+
+    public void setRentTime(String rentTime) {
+        this.rentTime = rentTime;
+    }
+
+    public String getDecorationTime() {
+        return decorationTime;
+    }
+
+    public void setDecorationTime(String decorationTime) {
+        this.decorationTime = decorationTime;
+    }
+
+    public String getBrokerageFee() {
+        return brokerageFee;
+    }
+
+    public void setBrokerageFee(String brokerageFee) {
+        this.brokerageFee = brokerageFee;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImageBase64() {
+        if (imageBase64 != null) {
+            return imageBase64.split(",")[1];
+        }
+        return null;
+    }
+
+    public void setImageBase64(String imageBase64) {
+        this.imageBase64 = imageBase64;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+
 
     public String getName() {
         return name;

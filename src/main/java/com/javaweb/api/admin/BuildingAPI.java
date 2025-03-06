@@ -25,8 +25,9 @@ public class BuildingAPI {
     private BuildingServiceImpl buildingServiceImpl;
 
     @PostMapping
-    public void addOrUpdateBuilding(@RequestBody BuildingDTO buildingDTO){
-         buildingService.addOrUpdateBulding(buildingDTO);
+    public ResponseEntity<BuildingDTO> addOrUpdateBuilding(@RequestBody BuildingDTO buildingDTO)
+    {
+        return ResponseEntity.ok(buildingService.addOrUpdateBuilding(buildingDTO));
     }
 
     @DeleteMapping("/{ids}")

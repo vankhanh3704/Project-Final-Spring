@@ -16,12 +16,10 @@ import com.javaweb.service.BuildingService;
 import com.javaweb.service.IUserService;
 import com.javaweb.utils.DisplayTagUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,16 +42,7 @@ public class BuildingController {
 
     @RequestMapping(value="/admin/building-list", method = RequestMethod.GET)
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest buildingSearchRequest, HttpServletRequest request){
-//        ModelAndView mav = new ModelAndView("admin/building/list");
-//        mav.addObject("modelSearch", buildingSearchRequest);
-//        //Xuong DB Lay Data ok roi
-//        List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
-//
-//        mav.addObject("buildingList", responseList);
-//        mav.addObject("listStaffs", userService.getStaffs());
-//        mav.addObject("districts", District.type());
-//        mav.addObject("typeCodes", TypeCode.type());
-//        return mav;
+
         ModelAndView mav = new ModelAndView("admin/building/list");
         mav.addObject("modelSearch", buildingSearchRequest);
         mav.addObject("listStaffs", userService.getStaffs());
@@ -64,17 +53,18 @@ public class BuildingController {
         {
             Long staffId = SecurityUtils.getPrincipal().getId();
             buildingSearchRequest.setStaffId(staffId);
-            mav.addObject("buildingList", buildingService.findAll(buildingSearchRequest, PageRequest.of(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems())));
+            mav.addObject("buildingList", buildingService.findAllHavePage(buildingSearchRequest, PageRequest.of(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems())));
         }
-        else mav.addObject("buildingList", buildingService.findAll(buildingSearchRequest, PageRequest.of(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems())));
+        else mav.addObject("buildingList", buildingService.findAllHavePage(buildingSearchRequest, PageRequest.of(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems())));
 
         BuildingSearchResponse model = new BuildingSearchResponse();
         DisplayTagUtils.of(request, model);
-        List<BuildingSearchResponse> res = buildingService.findAll(buildingSearchRequest, PageRequest.of(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems()));
+        List<BuildingSearchResponse> res = buildingService.findAllHavePage(buildingSearchRequest, PageRequest.of(buildingSearchRequest.getPage() - 1, buildingSearchRequest.getMaxPageItems()));
         model.setListResult(res);
         model.setTotalItems(buildingService.countTotalItem(res));
         mav.addObject("buildingList", model);
-        return mav;
+
+        return mav ;
     }
 
 
@@ -96,4 +86,5 @@ public class BuildingController {
         mav.addObject("typeCodes", TypeCode.type());
         return mav;
     }
+
 }

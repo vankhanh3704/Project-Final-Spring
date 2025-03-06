@@ -18,7 +18,9 @@ public class BuildingSearchResponse extends AbstractDTO {
     private String serviceFee;
     private Double brokerageFee;
 	private String typeCode;
-
+	private String image;
+	private String imageBase64;
+	private String note;
 	public Long getId() {
 		return id;
 	}
@@ -113,5 +115,30 @@ public class BuildingSearchResponse extends AbstractDTO {
 
 	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
+	}
+
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public String getImageBase64() {
+		return imageBase64;
+	}
+
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
 	}
 }

@@ -1,8 +1,15 @@
 package com.javaweb.controller.web;
 
+import com.javaweb.converter.BuildingDTOConverter;
+import com.javaweb.converter.BuildingSearchResponseConverter;
+import com.javaweb.enums.District;
+import com.javaweb.enums.TypeCode;
 import com.javaweb.model.request.BuildingSearchRequest;
-import com.javaweb.service.CustomerService;
+import com.javaweb.model.response.BuildingSearchResponse;
+import com.javaweb.repository.BuildingRepository;
+import com.javaweb.service.BuildingService;
 
+import com.javaweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,29 +23,53 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
 
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
 
 	@Autowired
-	CustomerService customerService;
+	private BuildingRepository buildingRepository;
+	@Autowired
+	private BuildingService buildingService;
+	@Autowired
+	private IUserService userService;
+	@Autowired
+	private BuildingDTOConverter buildingDTOConverter;
+	@Autowired
+	private BuildingSearchResponseConverter buildingSearchResponseConverter;
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
-	public ModelAndView homePage(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
+	public ModelAndView homePage(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView("web/home");
-		mav.addObject("modelSearch", buildingSearchRequest);
+        mav.addObject("modelSearch", buildingSearchRequest);
+        //Xuong DB Lay Data ok roi
+        List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+
+        mav.addObject("buildingList", responseList);
+        mav.addObject("listStaffs", userService.getStaffs());
+        mav.addObject("districts", District.type());
+        mav.addObject("typeCodes", TypeCode.type());
 		return mav;
 	}
 
 	@GetMapping(value="/gioi-thieu")
-	public ModelAndView introducceBuiding(){
+	public ModelAndView introduceBuilding(){
 		ModelAndView mav = new ModelAndView("web/introduce");
 		return mav;
 	}
 
 	@GetMapping(value="/san-pham")
-	public ModelAndView buidingList(){
+	public ModelAndView buildingList(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView("/web/list");
+		mav.addObject("modelSearch", buildingSearchRequest);
+		//Xuong DB Lay Data ok roi
+		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+		mav.addObject("buildingList", responseList);
+		mav.addObject("listStaffs", userService.getStaffs());
+		mav.addObject("districts", District.type());
+		mav.addObject("typeCodes", TypeCode.type());
 		return mav;
 	}
 

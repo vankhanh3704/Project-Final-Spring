@@ -110,12 +110,12 @@
 															</span>
                                             </a>
                                             <button id="btnDelete" type="button" disabled
-                                                    class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
-                                                    data-toggle="tooltip"
-                                                    title="Xóa bài viết" onclick="warningBeforeDelete()">
-															<span>
-																<i class="fa fa-trash-o bigger-110 pink"></i>
-															</span>
+                                                class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
+                                                data-toggle="tooltip"
+                                                title="Xóa bài viết" onclick="warningBeforeDelete()">
+                                                    <span>
+                                                        <i class="fa fa-trash-o bigger-110 pink"></i>
+                                                    </span>
                                             </button>
                                         </div>
                                     </div>

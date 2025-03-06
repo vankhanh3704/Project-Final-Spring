@@ -113,7 +113,6 @@
                             </form>
                         </div>
                     </form:form>
-
                 </div>
             </div><!-- /.page-content -->
             <c:forEach var="item" items="${transactionType}">
@@ -139,15 +138,15 @@
                                                    export="false"
                                                    class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
                                                    style="margin: 3em 0 1.5em;">
-                                        <display:column title="<fieldset class='form-group'>
-                                                            <input type='checkbox' id='checkAll' class='check-box-element'>
-                                                            </fieldset>" class="center select-cell"
-                                                        headerClass="center select-cell">
-                                            <fieldset>
-                                                <input type="checkbox" name="checkList" value="${tableList.id}"
-                                                       id="checkbox_${tableList.id}" class="check-box-element"/>
-                                            </fieldset>
-                                        </display:column>
+<%--                                        <display:column title="<fieldset class='form-group'>--%>
+<%--                                                            <input type='checkbox' id='checkAll' class='check-box-element'>--%>
+<%--                                                            </fieldset>" class="center select-cell"--%>
+<%--                                                        headerClass="center select-cell">--%>
+<%--                                            <fieldset>--%>
+<%--                                                <input type="checkbox" name="checkList" value="${tableList.id}"--%>
+<%--                                                       id="checkbox_${tableList.id}" class="check-box-element"/>--%>
+<%--                                            </fieldset>--%>
+<%--                                        </display:column>--%>
                                         <display:column headerClass="text-left" property="createdDate" title="Ngày tạo"/>
                                         <display:column headerClass="text-left" property="createdBy" title="Người tạo"/>
                                         <display:column headerClass="text-left" property="modifiedDate" title="Ngày sửa"/>
@@ -181,15 +180,15 @@
                                                    export="false"
                                                    class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
                                                    style="margin: 3em 0 1.5em;">
-                                        <display:column title="<fieldset class='form-group'>
-                                                            <input type='checkbox' id='checkAll' class='check-box-element'>
-                                                            </fieldset>" class="center select-cell"
-                                                        headerClass="center select-cell">
-                                            <fieldset>
-                                                <input type="checkbox" name="checkList" value="${tableList.id}"
-                                                       id="checkbox_${tableList.id}" class="check-box-element"/>
-                                            </fieldset>
-                                        </display:column>
+<%--                                        <display:column title="<fieldset class='form-group'>--%>
+<%--                                                            <input type='checkbox' id='checkAll' class='check-box-element'>--%>
+<%--                                                            </fieldset>" class="center select-cell"--%>
+<%--                                                        headerClass="center select-cell">--%>
+<%--                                            <fieldset>--%>
+<%--                                                <input type="checkbox" name="checkList" value="${tableList.id}"--%>
+<%--                                                       id="checkbox_${tableList.id}" class="check-box-element"/>--%>
+<%--                                            </fieldset>--%>
+<%--                                        </display:column>--%>
                                         <display:column headerClass="text-left" property="createdDate" title="Ngày tạo"/>
                                         <display:column headerClass="text-left" property="createdBy" title="Người tạo"/>
                                         <display:column headerClass="text-left" property="modifiedDate" title="Ngày sửa"/>

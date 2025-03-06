@@ -103,7 +103,6 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
         sql.append(where);
         sql.append(" group by building.id;");
         Query query=entityManager.createNativeQuery(sql.toString(),BuildingEntity.class);
-
         return query.getResultList();
     }
 

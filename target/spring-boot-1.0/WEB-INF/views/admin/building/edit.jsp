@@ -51,7 +51,7 @@
                                     <div class="col-xs-2">
 
                                         <form:select class="form-control" path="district">
-                                          <c:if test="${not empty buildingEdit.id}">
+                                             <c:if test="${not empty buildingEdit.id}">
                                             <form:option value="">${buildingEdit.district}</form:option>
                                           </c:if>
                                           <c:if test="${empty buildingEdit.id}">
@@ -155,30 +155,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-xs-3">Đặt cọc</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="deposit" name="deposit" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Thanh toán</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="payment" name="payment" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Thời hạn thuê</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="renttime" name="renttime" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Thời hạn trang trí</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="decorationtime" name="decorationtime" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-xs-3">Tên quản lý</label>
                                     <div class="col-xs-9">
                                         <form:input class="form-control" path="managerName"/>
@@ -207,7 +183,19 @@
                                     <div class="col-xs-9">
 <%--                                        <input class="form-control" type="text" id="note" name="note">--%>
                                         <input class="form-control" type="text" id="note" name="note" value="">
-
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 no-padding-right">Hình đại diện</label>
+                                    <input class="col-sm-3 no-padding-right" type="file" id="uploadImage"/>
+                                    <div class="col-sm-9">
+                                        <c:if test="${not empty buildingEdit.image}">
+                                            <c:set var="imagePath" value="/repository${buildingEdit.image}"/>
+                                            <img src="${imagePath}" id="viewImage" width="300px" height="300px" style="margin-top: 50px">
+                                        </c:if>
+                                        <c:if test="${empty buildingEdit.image}">
+                                            <img src="/admin/image/default.png" id="viewImage" width="300px" height="300px">
+                                        </c:if>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -221,7 +209,6 @@
                                             <button type="button" class="btn btn-info" id="btnAddOrUpdateBuilding">Thêm mới</button>
                                             <button type="button" class="btn btn-info" id="btnCancel">Hủy thao tác</button>
                                         </c:if>
-
                                     </div>
                                 </div>
                                 <form:hidden path="id" id="buildingId"/>
@@ -259,6 +246,20 @@
 </div>
 
 <script>
+
+    var imageBase64 = '';
+    var imageName = '';
+
+    function openImage(input, imageView) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#' +imageView).attr('src', reader.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     $('#btnAddOrUpdateBuilding').click(function () {
         var data = {}
         var typeCode = [];
@@ -269,18 +270,32 @@
             } else {
                 typeCode.push(v.value);
             }
+            if ('' !== imageBase64) {
+                data['imageBase64'] = imageBase64;
+                data['imageName'] = imageName;
+            }
         });
         data['typeCode'] = typeCode;
+         $('#loading_image').show();
         if (typeCode != "" && data["district"]!= "") {
             addOrUpdateBuilding(data);
             window.location.href = "<c:url value="/admin/building-list"/>";
         } else {
             $('#infoModal').modal('show');
 
-
         }
     });
 
+    $('#uploadImage').change(function (event) {
+        var reader = new FileReader();
+        var file = $(this)[0].files[0];
+        reader.onload = function(e){
+            imageBase64 = e.target.result;
+            imageName = file.name; // ten hinh khong dau, khoang cach. Dat theo format sau: a-b-c
+        };
+        reader.readAsDataURL(file);
+        openImage(this, "viewImage");
+    });
     //call api
     function addOrUpdateBuilding(data) {
         $.ajax({

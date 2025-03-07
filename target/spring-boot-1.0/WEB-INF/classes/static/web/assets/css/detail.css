@@ -1,0 +1,47 @@
+.detail-est {
+    margin-top: 80px;
+    padding: 40px 20px;
+}
+.detail-est__image {
+    width: 100%;
+    height: auto;
+}
+.detail-est__image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.detail-est__content {
+    margin-top: 20px;
+}
+.detail-est__short-info {
+    display: flex;
+    margin: 30px 0;
+}
+.detail-est__short-info--price, .detail-est__short-info--area, .detail-est__short-info--bed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 20px;
+}
+.detail-est__short-info--price .title, .detail-est__short-info--price .ext, .detail-est__short-info--area .title, .detail-est__short-info--area .ext, .detail-est__short-info--bed .title, .detail-est__short-info--bed .ext {
+    font-size: 14px;
+    color: #5E5E5E;
+    line-height: 20px;
+    display: block;
+}
+.detail-est__short-info--price .value, .detail-est__short-info--area .value, .detail-est__short-info--bed .value {
+    font-weight: 600;
+    font-size: 18px;
+}
+.detail-est__desc {
+    display: flex;
+    flex-wrap: wrap;
+}
+.detail-est__desc--item {
+    padding: 10px 5px;
+    border: 1px solid var(--color-border);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}

@@ -92,13 +92,10 @@ public class BuildingServiceImpl implements BuildingService {
         for (BuildingEntity item : buildingEntities) {
             BuildingSearchResponse building = buildingSearchResponseConverter.toBuildingSearchResponse(item);
             if (item.getImage() != null) {
-                String base64Image =
-                    Base64.encodeBase64String(
-                    Files.readAllBytes(Paths.get("/Users/hoangkhanhvan/Desktop/" + item.getImage())));
+                String base64Image = Base64.encodeBase64String(Files.readAllBytes(Paths.get("/Users/hoangkhanhvan/Desktop/" + item.getImage())));
                     building.setImageBase64(base64Image);
             }
             result.add(building);
-
         }
         return result;
     }

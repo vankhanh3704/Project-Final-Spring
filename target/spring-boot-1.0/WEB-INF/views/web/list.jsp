@@ -22,7 +22,7 @@
                         <div class="product__content--title" style="margin-top: 0;">Danh sách sản phẩm</div>
                         <select name="" id="filter" class="product__content--sort">
                             <option value="mac-dinh">-- Mặc định --</option>
-                            <option value="thap-cao">Giá từ thấp tới cap</option>
+                            <option value="thap-cao">Giá từ thấp tới cao</option>
                             <option value="cao-thap">Giá từ cao tới thấp</option>
                             <option value="dien-tich-tang">Diện tích tăng dần</option>
                             <option value="dien-tich-giam">Diện tích giảm dần</option>

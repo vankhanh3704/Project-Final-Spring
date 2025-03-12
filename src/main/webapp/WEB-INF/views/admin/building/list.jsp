@@ -161,7 +161,7 @@
                     Thêm toà nhà
                 </button>
             </a>
-            <button class="btn btn-rev" title="Xóa tòa nhà" id="btnDeleteCustomers">
+            <button class="btn btn-rev" title="Xóa tòa nhà" id="btnDeleteCustomers" data-toggle="tooltip" onclick="warningBeforeDelete()">
                 <i class="las la-trash-alt"></i>
                 Xoá toà nhà
             </button>
@@ -273,6 +273,16 @@
             $('#searchFormContainer').toggle(); // Ẩn/hiện form
         });
     });
+
+   function warningBeforeDelete() {
+        showAlertBeforeDelete(function () {
+            event.preventDefault();
+            var dataArray = $('tbody input[type=checkbox]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            deleteBuildings(dataArray);
+        });
+    }
 
     function assignmentBuilding(buildingId) {
         $('#assignmentBuildingModal').modal();

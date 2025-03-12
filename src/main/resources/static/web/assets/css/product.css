@@ -75,6 +75,7 @@
     height: 170px;
     position: relative;
     min-width: 230px;
+    width: 250px;
 }
 .product__item--image::before {
     content: "";

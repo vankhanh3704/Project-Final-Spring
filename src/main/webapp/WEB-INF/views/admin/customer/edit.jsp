@@ -14,172 +14,149 @@
     <title>Thêm sửa khách hàng</title>
 </head>
 <body>
-<div class="main-content" id="main-container">
-    <div class="main-content">
-        <div class="main-content-inner">
-            <div class="breadcrumbs" id="breadcrumbs">
-                <script type="text/javascript">
-                    try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-                </script>
-
-                <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">Home</a>
-                    </li>
-                    <li class="active">Dashboard</li>
-                </ul><!-- /.breadcrumb -->
-            </div>
-
-            <div class="page-content">
-                <div class="page-header">
-                    <h1>
-                        Sửa hoặc thêm khách hàng
-                        <small>
-                            <i class="ace-icon fa fa-angle-double-right"></i>
-                            overview &amp; stats
-                        </small>
-                    </h1>
-                </div><!-- /.page-header -->
-
-                <div class="row" style="font-family: Times New Roman, Times, serif;">
-                    <form:form modelAttribute="customerEdit" id="listForm" method="GET">
-                        <div class="col-xs-12">
-                            <form action="" class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <label class="col-xs-3">Tên khách hàng</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="fullName" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-xs-3">Số điện thoại</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="customerPhone" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-xs-3">Email</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="email" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-xs-3">Tên công ty</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="companyName"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-xs-3">Yêu cầu</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="note"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-xs-3">Tình trạng</label>
-                                    <div class="col-xs-9">
-                                        <form:select class="form-control" path="status">
-                                            <form:option value="">---Chọn Tình Trạng---</form:option>
-                                            <form:options items="${statuss}"></form:options>
-                                        </form:select>
-                                    </div>
-
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3"></label>
-                                    <div class="col-xs-9">
-
-                                        <c:if test="${not empty customerEdit.id}">
-                                            <button type="button" class="btn btn-primary" id="btnAddOrUpdateBuilding">Cập nhật khách hàng</button>
-                                            <button type="button" class="btn btn-primary" id="btnCancel">Hủy thao tác</button>
-                                        </c:if>
-
-                                        <c:if test="${empty customerEdit.id}">
-                                            <button type="button" class="btn btn-primary" id="btnAddOrUpdateBuilding">Thêm mới khách hàng</button>
-                                            <button type="button" class="btn btn-primary" id="btnCancel">Hủy thao tác</button>
-                                        </c:if>
-                                        <img src="/img/loading.gif" style="display: none; height: 100px" id="loading_image">
-                                    </div>
-                                </div>
-
-                                <form:hidden path="id" id="id"/>
-                            </form>
-                        </div>
-                    </form:form>
-                </div>
-            </div><!-- /.page-content -->
-            <c:forEach var="item" items="${transactionType}">
-                <div class="col-xs-12">
-                    <div class="col-sm-12">
-                        <h3 class="header smaller lighter blue">
-                            ${item.value}
-                        </h3>
-                        <button class="btn btn-lg btn-primary" onclick="transactionType('${item.key}', ${customerEdit.id})">
-                            <i class="orange ace-icon fa fa-location-arrow bigger-130"></i>Add
-                        </button>
+<main class="main-content-inner">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="widget-box">
+                    <div class="widget-box__title">
+                        <h5>
+                            <i class="las la-tools"></i>
+                            Thêm hoặc sửa khách hàng
+                        </h5>
                     </div>
-                    <c:if test="${item.key == 'CSKH'}">
-                        <div class="col-xs-12">
-                            <table id="simple-table" class="table table-striped table-bordered table-hover">
-                                <thead></thead>
-                                <tbody>
-                                <form:form modelAttribute="transactionListCSKH" method="get">
-                                    <display:table name="transactionListCSKH" cellspacing="0" cellpadding="0"
-                                                   sort="external"
-                                                    defaultsort="2" defaultorder="ascending"
-                                                   id="tableList"
-                                                   export="false"
-                                                   class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
-                                                   style="margin: 3em 0 1.5em;">
-<%--                                        <display:column title="<fieldset class='form-group'>--%>
-<%--                                                            <input type='checkbox' id='checkAll' class='check-box-element'>--%>
-<%--                                                            </fieldset>" class="center select-cell"--%>
-<%--                                                        headerClass="center select-cell">--%>
-<%--                                            <fieldset>--%>
-<%--                                                <input type="checkbox" name="checkList" value="${tableList.id}"--%>
-<%--                                                       id="checkbox_${tableList.id}" class="check-box-element"/>--%>
-<%--                                            </fieldset>--%>
-<%--                                        </display:column>--%>
-                                        <display:column headerClass="text-left" property="createdDate" title="Ngày tạo"/>
-                                        <display:column headerClass="text-left" property="createdBy" title="Người tạo"/>
-                                        <display:column headerClass="text-left" property="modifiedDate" title="Ngày sửa"/>
-                                        <display:column headerClass="text-left" property="modifiedBy" title="Người sửa"/>
-                                        <display:column headerClass="text-left" property="note" title="Chi tiết giao dịch"/>
+                    <div class="widget-box__body">
+                        <div class="widget-box__main">
+                            <form:form modelAttribute="customerEdit" id="listForm" method="GET">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="form-group">
+                                            <div class="col-xl-6">
+                                                <label class="name">Tên khách hàng</label>
+                                                <form:input class="form-control" path="fullName" />
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <label class="name">Số điện thoại</label>
+                                                <form:input class="form-control" path="customerPhone" />
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                        <display:column headerClass="col-actions" title="Thao tác">
-                                            <div class="hidden-sm hidden-xs btn-group"></div>
+                                    <div class="col-xl-12">
+                                        <div class="form-group">
+                                            <div class="col-xl-6">
+                                                <label class="name">Email</label>
+                                                <form:input class="form-control" path="email" />
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <label class="name">Tên công ty</label>
+                                                <form:input class="form-control" path="companyName"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="form-group">
+                                            <div class="col-xl-6">
+                                                <label class="name">Yêu cầu</label>
+                                                <form:input class="form-control" path="note"/>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <label class="col-xs-3">Tình trạng xử lý</label>
+                                                <div class="col-xs-9">
+                                                    <form:select class="form-control" path="status">
+                                                        <form:option value="">---Chọn Tình Trạng---</form:option>
+                                                        <form:options items="${statuss}"></form:options>
+                                                    </form:select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                            <a class="btn btn-xs btn-info" title="Sửa thông tin giao dịch"
-                                               onclick="UpdateTransaction(${tableList.id}, '${item.key}', ${customerEdit.id});">
-                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                            </a>
-                                        </display:column>
-                                    </display:table>
-                                </form:form>
-                                </tbody>
-                            </table>
+                                    <div class="col-xl-12 flex-end">
+                                        <c:if test="${not empty customerEdit.id}">
+                                        <button type="button" class="btn btn-success" id="btnAddOrUpdateBuilding">Cập nhật khách hàng</button>
+                                        <button type="button" class="btn btn-warning" id="btnCancel">Hủy thao tác</button>
+                                    </c:if>
+
+                                    <c:if test="${empty customerEdit.id}">
+                                        <button type="button" class="btn btn-success" id="btnAddOrUpdateBuilding">Thêm mới khách hàng</button>
+                                        <button type="button" class="btn btn-warning" id="btnCancel">Hủy thao tác</button>
+                                    </c:if>
+
+                                    </div>
+                                     <form:hidden path="id" id="id"/>
+                                </div>
+                            </form:form>
                         </div>
-                    </c:if>
-                    <c:if test="${item.key == 'DDX'}">
-                        <div class="col-xs-12">
-                            <table id="simple-table" class="table table-striped table-bordered table-hover">
-                                <thead></thead>
-                                <tbody>
-                                <form:form modelAttribute="transactionListDDX">
-                                    <display:table name="transactionListDDX" cellspacing="0" cellpadding="0"
-                                                   sort="external"
-                                                   defaultsort="2" defaultorder="ascending"
-                                                   id="tableList"
-                                                   export="false"
-                                                   class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
-                                                   style="margin: 3em 0 1.5em;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.page-content -->
+    <c:forEach var="item" items="${transactionType}">
+        <div class="col-xl-12">
+                <div class="pull-right">
+                    <h4>${item.value}</h4>
+                </div>
+                <button class="btn btn-add" onclick="transactionType('${item.key}', ${customerEdit.id})" style="margin: 20px 0px 40px 20px">
+                    <i class="lar la-hand-point-right"></i>
+                    Add
+                </button>
+            <c:if test="${item.key == 'CSKH'}">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table table-striped table-bordered table-hover">
+                        <thead></thead>
+                        <tbody>
+                        <form:form modelAttribute="transactionListCSKH" method="get">
+                            <display:table name="transactionListCSKH" cellspacing="0" cellpadding="0"
+                                           sort="external"
+                                            defaultsort="2" defaultorder="ascending"
+                                           id="tableList"
+                                           export="false"
+                                           class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
+                                           style="margin: 3em 0 1.5em;">
+<%--                                        <display:column title="<fieldset>--%>
+<%--                                                            <input type='checkbox' id='checkAll' class='check-box-element'>--%>
+<%--                                                            </fieldset>" class="center select-cell"--%>
+<%--                                                        headerClass="center select-cell">--%>
+<%--                                            <fieldset>--%>
+<%--                                                <input type="checkbox" name="checkList" value="${tableList.id}"--%>
+<%--                                                       id="checkbox_${tableList.id}" class="check-box-element"/>--%>
+<%--                                            </fieldset>--%>
+<%--                                        </display:column>--%>
+                                <display:column  property="createdDate" title="Ngày tạo"/>
+                                <display:column  property="createdBy" title="Người tạo"/>
+                                <display:column  property="modifiedDate" title="Ngày sửa"/>
+                                <display:column  property="modifiedBy" title="Người sửa"/>
+                                <display:column  property="note" title="Chi tiết giao dịch"/>
+
+                                <display:column headerClass="col-actions" title="Thao tác">
+                                    <div class="hidden-sm hidden-xs btn-group"></div>
+
+                                    <a class="btn btn-xs btn-info" title="Sửa thông tin giao dịch"
+                                       onclick="UpdateTransaction(${tableList.id}, '${item.key}', ${customerEdit.id});">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+                                </display:column>
+                            </display:table>
+                        </form:form>
+                        </tbody>
+                    </table>
+                </div>
+            </c:if>
+            <c:if test="${item.key == 'DDX'}">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table table-striped table-bordered table-hover">
+                        <thead></thead>
+                        <tbody>
+                        <form:form modelAttribute="transactionListDDX">
+                            <display:table name="transactionListDDX" cellspacing="0" cellpadding="0"
+                                           sort="external"
+                                           defaultsort="2" defaultorder="ascending"
+                                           id="tableList"
+                                           export="false"
+                                           class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
+                                           style="margin: 3em 0 1.5em;">
 <%--                                        <display:column title="<fieldset class='form-group'>--%>
 <%--                                                            <input type='checkbox' id='checkAll' class='check-box-element'>--%>
 <%--                                                            </fieldset>" class="center select-cell"--%>
@@ -189,30 +166,29 @@
 <%--                                                       id="checkbox_${tableList.id}" class="check-box-element"/>--%>
 <%--                                            </fieldset>--%>
 <%--                                        </display:column>--%>
-                                        <display:column headerClass="text-left" property="createdDate" title="Ngày tạo"/>
-                                        <display:column headerClass="text-left" property="createdBy" title="Người tạo"/>
-                                        <display:column headerClass="text-left" property="modifiedDate" title="Ngày sửa"/>
-                                        <display:column headerClass="text-left" property="modifiedBy" title="Người sửa"/>
-                                        <display:column headerClass="text-left" property="note" title="Chi tiết giao dịch"/>
+                                <display:column  property="createdDate" title="Ngày tạo"/>
+                                <display:column  property="createdBy" title="Người tạo"/>
+                                <display:column  property="modifiedDate" title="Ngày sửa"/>
+                                <display:column  property="modifiedBy" title="Người sửa"/>
+                                <display:column  property="note" title="Chi tiết giao dịch"/>
 
-                                        <display:column headerClass="col-actions" title="Thao tác">
+                                <display:column headerClass="col-actions" title="Thao tác">
 <%--                                            <button class="btn btn-xs btn-info" data-toggle="tooltip" title="Sửa thông tin giao dịch" onclick="UpdateTransaction(${tableList.id})">--%>
 <%--                                                <i class="ace-icon fa fa-pencil bigger-120"></i>--%>
 <%--                                            </button>--%>
-                                            <a class="btn btn-xs btn-info" title="Sửa thông tin giao dịch" onclick="UpdateTransaction(${tableList.id}, '${item.key}', ${customerEdit.id});">
-                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                            </a>
-                                        </display:column>
-                                    </display:table>
-                                </form:form>
-                                </tbody>
-                            </table>
-                        </div>
-                    </c:if>
+                                    <a class="btn btn-xs btn-info" title="Sửa thông tin giao dịch" onclick="UpdateTransaction(${tableList.id}, '${item.key}', ${customerEdit.id});">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+                                </display:column>
+                            </display:table>
+                        </form:form>
+                        </tbody>
+                    </table>
                 </div>
-            </c:forEach>
+            </c:if>
         </div>
-    </div><!-- /.main-content -->
+    </c:forEach>
+</main>
     <div class="modal fade" id="transactionTypeModal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -246,7 +222,7 @@
             </div>
         </div>
     </div>
-</div><!-- /.main-container -->
+<!-- /.main-container -->
 <script>
 
     function transactionType(code, customerId)
@@ -327,7 +303,7 @@
         $.each(formData, function (i, v) {
                 data["" + v.name + ""] = v.value;
         });
-        if(data['customerPhone'] != '' && data['fullName'] != '')
+        if(data['customerPhone'] !== '' && data['fullName'] !== '')
         {
             addOrUpdateBuilding(data);
         }

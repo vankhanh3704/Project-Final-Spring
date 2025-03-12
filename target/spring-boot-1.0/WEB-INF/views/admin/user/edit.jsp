@@ -5,26 +5,18 @@
 <head>
     <title>Chỉnh sửa người dùng</title>
 </head>
-<div class="main-content">
-    <div class="main-content-inner">
-        <div class="breadcrumbs" id="breadcrumbs">
-            <script type="text/javascript">
-                try {
-                    ace.settings.check('breadcrumbs', 'fixed')
-                } catch (e) {
-                }
-            </script>
-            <ul class="breadcrumb">
-                <li>
-                    <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="#">Trang chủ</a>
-                </li>
-                <li class="active">Chỉnh sửa người dùng</li>
-            </ul><!-- /.breadcrumb -->
-        </div>
-        <div class="page-content">
-            <div class="row">
-                <div class="col-xs-12">
+<body>
+<main class="main-content-inner">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="widget-box">
+                    <div class="widget-box__title">
+                        <h5>
+                            <i class="las la-tools"></i>
+                            Sửa thông tin người dùng
+                        </h5>
+                    </div>
                     <c:if test="${not empty messageResponse}">
                         <div class="alert alert-block alert-${alert}">
                             <button type="button" class="close" data-dismiss="alert">
@@ -34,66 +26,65 @@
                         </div>
                     </c:if>
                     <form:form id="formEdit" class="form-horizontal" modelAttribute="model">
-                    <div id="profile">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">Vai trò</label>
-                            <div class="col-sm-9">
-                                <form:select path="roleCode" id="roleCode">
-                                    <form:option value="" label="--- Chọn vai trò ---"/>
-                                    <form:options items="${model.roleDTOs}"/>
-                                </form:select>
+                        <div id="profile">
+                            <div class="form-group">
+                                <label class="col-xl-3 control-label no-padding-right">Vai trò</label>
+                                <div class="col-xl-6">
+                                    <form:select path="roleCode" id="roleCode" class="form-control">
+                                        <form:option value="" label="--- Chọn vai trò ---"/>
+                                        <form:options items="${model.roleDTOs}"/>
+                                    </form:select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-4"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">
-                                Tên đăng nhập
-                            </label>
-                            <div class="col-sm-9">
+                            <div class="form-group">
+                                <label class="col-xl-3 control-label no-padding-right">
+                                    Tên đăng nhập
+                                </label>
+                                <div class="col-xl-6">
+                                    <c:if test="${not empty model.id}">
+                                        <form:input path="userName" id="userName" cssClass="form-control"
+                                                    disabled="true"/>
+                                    </c:if>
+                                    <c:if test="${empty model.id}">
+                                        <form:input path="userName" id="userName" cssClass="form-control"/>
+                                    </c:if>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xl-3 control-label no-padding-right">
+                                        <%--<spring:message code="label.fullname"/>--%>
+                                    Tên đầy đủ
+                                </label>
+                                <div class="col-xl-6">
+                                    <form:input path="fullName" id="fullName" cssClass="form-control"/>
+                                </div>
+                            </div>
+
+                            <!--Btn-->
+                            <div class="col-xl-12 flex-end">
                                 <c:if test="${not empty model.id}">
-                                    <form:input path="userName" id="userName" cssClass="form-control" disabled="true"/>
+                                    <input type="button" class="btn btn-white btn-info btn-bold"
+                                           value="Cập nhật người dùng" id="btnAddOrUpdateUsers"/>
+                                    <input type="button" class="btn btn-white btn-info btn-bold"
+                                           value="Reset mật khẩu" id="btnResetPassword"/>
+                                    <img src="/img/loading.gif" style="display: none; height: 100px" id="loading_image">
                                 </c:if>
                                 <c:if test="${empty model.id}">
-                                    <form:input path="userName" id="userName" cssClass="form-control"/>
+                                    <input type="button" class="btn btn-white btn-warning btn-bold"
+                                           value="Thêm mới người dùng" id="btnAddOrUpdateUsers"/>
+                                    <img src="/img/loading.gif" style="display: none; height: 100px" id="loading_image">
                                 </c:if>
                             </div>
+                            <!--Btn-->
+                            <form:hidden path="id" id="userId"/>
                         </div>
-                        <div class="space-4"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">
-                                <%--<spring:message code="label.fullname"/>--%>
-                                Tên đầy đủ
-                            </label>
-                            <div class="col-sm-9">
-                                <form:input path="fullName" id="fullName" cssClass="form-control"/>
-                            </div>
-                        </div>
-                        <div class="space-4"></div>
-                        <!--Btn-->
-                        <div class="col-sm-12">
-                            <label class="col-sm-3 control-label no-padding-right message-info"></label>
-                            <c:if test="${not empty model.id}">
-                                <input type="button" class="btn btn-white btn-warning btn-bold"
-                                       value="Cập nhật người dùng" id="btnAddOrUpdateUsers"/>
-                                <input type="button" class="btn btn-white btn-warning btn-bold"
-                                       value="Reset mật khẩu" id="btnResetPassword"/>
-                                <img src="/img/loading.gif" style="display: none; height: 100px" id="loading_image">
-                            </c:if>
-                            <c:if test="${empty model.id}">
-                                <input type="button" class="btn btn-white btn-warning btn-bold"
-                                       value="Thêm mới người dùng" id="btnAddOrUpdateUsers"/>
-                                <img src="/img/loading.gif" style="display: none; height: 100px" id="loading_image">
-                            </c:if>
-                        </div>
-                        <!--Btn-->
-                        <form:hidden path="id" id="userId"/>
-                        </form:form>
-                    </div>
+                    </form:form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</main>
+</body>
 <script>
     $("#btnAddOrUpdateUsers").click(function (event) {
         event.preventDefault();
@@ -110,8 +101,7 @@
             } else {
                 window.location.href = "<c:url value='/admin/user-edit-"+userId+"?message=role_require'/>";
             }
-        }
-        else {
+        } else {
             var userName = dataArray['userName'];
             var roleCode = dataArray['roleCode'];
             if (userName != '' && roleCode != '') {
@@ -164,7 +154,7 @@
 
     function resetPassword(id) {
         $.ajax({
-            url: '${formUrl}/password/'+id+'/reset',
+            url: '${formUrl}/password/' + id + '/reset',
             type: 'PUT',
             dataType: 'json',
             success: function (res) {

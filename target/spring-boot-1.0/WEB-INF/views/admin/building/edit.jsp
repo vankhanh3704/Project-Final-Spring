@@ -7,225 +7,421 @@
     <title>Thêm tòa nhà</title>
 </head>
 <body>
-<div class="main-content" id="main-container">
-
-    <div class="main-content">
-        <div class="main-content-inner">
-            <div class="breadcrumbs" id="breadcrumbs">
-                <script type="text/javascript">
+<main class="main-content-inner">
+            <div class="page-content">
+            <script type="text/javascript">
                     try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
                 </script>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="widget-box">
+                            <div class="widget-box__title">
+                                <h5>
+                                    <i class="las la-tools"></i>
+                                    Thêm toà nhà
+                                </h5>
+                            </div>
+                            <div class="widget-box__body">
+                                <div class="widget-box__main">
+                                    <form:form modelAttribute="buildingEdit" id="listForm" method="GET">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-6">
+                                                        <label class="name">Tên tòa nhà</label>
+                                                         <form:input class="form-control" path="name" />
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <label class="name">Tỉnh/Thành phố</label>
+                                                        <form:select class="form-control" path="district">
+                                                             <c:if test="${not empty buildingEdit.id}">
+                                                            <form:option value="">${buildingEdit.district}</form:option>
+                                                          </c:if>
+                                                          <c:if test="${empty buildingEdit.id}">
+                                                            <form:option value="">---Chọn Quận---</form:option>
+                                                          </c:if>
 
-                <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">Home</a>
-                    </li>
-                    <li class="active">Dashboard</li>
-                </ul><!-- /.breadcrumb -->
+                                                            <form:options items="${districts}"/>
+                                                        </form:select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-4">
+                                                        <label class="name">Quận/Huyện</label>
+                                                        <input class="form-control" path="district" />
+                                                    </div>
+                                                    <div class="col-xl-4">
+                                                        <label class="name">Phường/Xã</label>
+                                                         <form:input class="form-control" path="ward"/>
+                                                    </div>
+                                                    <div class="col-xl-4">
+                                                        <label class="name">Đường/Phố</label>
+                                                        <form:input class="form-control" path="street" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Diện tích sàn</label>
+                                                        <form:input class="form-control" path="floorArea" />
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Số tầng hầm</label>
+                                                        <form:input class="form-control" path="numberOfBasement" />
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Hướng</label>
+                                                        <form:input class="form-control" path="direction"/>
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Hạng</label>
+                                                        <form:input class="form-control" path="level" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Diện tích thuê</label>
+<%--                                                       <form:input class="form-control" path="rentArea"/>--%>
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Diện tích thuê</label>
+                                                        <form:input class="form-control" path="rentArea"/>
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Giá thuê </label>
+                                                        <form:input class="form-control" path="rentPrice"/>
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Giá thuê đến</label>
+                                                        <input type="number" class="form-control" name="rentPriceTo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Mô tả giá</label>
+                                                        <input type="text" class="form-control" name="rentpricedescription">
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Phí dịch vụ</label>
+                                                        <input type="number" class="form-control" name="servicefee">
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Phí ô tô</label>
+                                                        <input type="number" class="form-control" name="carfee">
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Phí mô tô</label>
+                                                        <input type="number" class="form-control" name="motorbikefee">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Phí môi giới</label>
+                                                        <input type="text" class="form-control" name="brokeragefee">
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Phí ngoài giờ</label>
+                                                        <input type="number" class="form-control" name="servicefee">
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Đặt cọc</label>
+                                                        <input type="number" class="form-control" name="carfee">
+                                                    </div>
+                                                    <div class="col-xl-3">
+                                                        <label class="name">Thanh toán</label>
+                                                        <input type="number" class="form-control" name="brokeragefee">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-4">
+                                                        <label class="name">Tên quản lý</label>
+                                                        <form:input class="form-control" path="managerName"/>
+                                                    </div>
+                                                    <div class="col-xl-4">
+                                                        <label class="name">SĐT quản lý</label>
+                                                        <form:input type="text" class="form-control" path="managerPhone"/>
+                                                    </div>
+                                                    <div class="col-xl-4">
+                                                        <label class="name">Nhân viên</label>
+                                                        <select class="form-control" name="staffId">
+                                                            <option value="">---Chọn nhân viên---</option>
+                                                            <option value="1">Nhân viên 1</option>
+                                                            <option value="2">Nhân viên 2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 no-padding-right">Hình đại diện</label>
+                                                    <input class="col-sm-3 no-padding-right" type="file" id="uploadImage"/>
+                                                    <div class="col-sm-9">
+                                                        <c:if test="${not empty buildingEdit.image}">
+                                                            <c:set var="imagePath" value="/repository${buildingEdit.image}"/>
+                                                            <img src="${imagePath}" id="viewImage" width="300px" height="300px" style="margin-top: 50px" alt="">
+                                                        </c:if>
+                                                        <c:if test="${empty buildingEdit.image}">
+                                                            <img src="/admin/image/default.png" id="viewImage" width="300px" height="300px">
+                                                        </c:if>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="form-group">
+                                                    <div class="col-xl-6">
+                                                        <label class="name pad-20px">Loại toà nhà</label>
+                                                        <form:checkboxes items="${typeCodes}" path="typeCode" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 flex-end">
+                                                <c:if test="${not empty buildingEdit.id}">
+                                                    <button type="button" class="btn btn-success" id="btnAddOrUpdateBuilding">Cập nhật tòa nhà</button>
+                                                    <button type="button" class="btn btn-warning" id="btnCancel">Hủy thao tác</button>
+                                                </c:if>
+                                                <c:if test="${empty buildingEdit.id}">
+                                                    <button type="button" class="btn btn-success" id="btnAddOrUpdateBuilding">Thêm mới</button>
+                                                    <button type="button" class="btn btn-warning" id="btnCancel">Hủy thao tác</button>
+                                                </c:if>
+                                            </div>
+                                            <form:hidden path="id" id="buildingId"/>
+                                        </div>
+                                    </form:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="page-content">
-                <div class="page-header">
-                    <h1 style="font-family: 'Times New Roman', Times, serif;">
-                        Dashboard
-                        <small>
-                            <i class="ace-icon fa fa-angle-double-right"></i>
-                            overview &amp; stats
-                        </small>
-                    </h1>
-                </div><!-- /.page-header -->
+        </main>
+<%--<div class="main-content" id="main-container">--%>
 
-                <div class = "row" style="font-family: 'Times New Roman', Times, serif;">
-                    <form:form modelAttribute="buildingEdit" id="listForm" method="GET">
-                        <div class="col-xs-12">
-                            <form class="form-horizontal" role="form" id="form-edit" >
-                                <div class="form-group">
-                                    <label class="col-xs-3">Tên tòa nhà</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="name" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Quận</label>
-                                    <div class="col-xs-2">
+<%--    <div class="main-content">--%>
+<%--        <div class="main-content-inner">--%>
+<%--            <div class="breadcrumbs" id="breadcrumbs">--%>
+<%--                <script type="text/javascript">--%>
+<%--                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}--%>
+<%--                </script>--%>
 
-                                        <form:select class="form-control" path="district">
-                                             <c:if test="${not empty buildingEdit.id}">
-                                            <form:option value="">${buildingEdit.district}</form:option>
-                                          </c:if>
-                                          <c:if test="${empty buildingEdit.id}">
-                                            <form:option value="">---Chọn Quận---</form:option>
-                                          </c:if>
+<%--                <ul class="breadcrumb">--%>
+<%--                    <li>--%>
+<%--                        <i class="ace-icon fa fa-home home-icon"></i>--%>
+<%--                        <a href="#">Home</a>--%>
+<%--                    </li>--%>
+<%--                    <li class="active">Dashboard</li>--%>
+<%--                </ul><!-- /.breadcrumb -->--%>
+<%--            </div>--%>
 
-                                            <form:options items="${districts}"/>
-                                        </form:select>
+<%--            <div class="page-content">--%>
+<%--                <div class="page-header">--%>
+<%--                    <h1 style="font-family: 'Times New Roman', Times, serif;">--%>
+<%--                        Dashboard--%>
+<%--                        <small>--%>
+<%--                            <i class="ace-icon fa fa-angle-double-right"></i>--%>
+<%--                            overview &amp; stats--%>
+<%--                        </small>--%>
+<%--                    </h1>--%>
+<%--                </div><!-- /.page-header -->--%>
 
+<%--                <div class = "row" style="font-family: 'Times New Roman', Times, serif;">--%>
+<%--                    <form:form modelAttribute="buildingEdit" id="listForm" method="GET">--%>
+<%--                        <div class="col-xs-12">--%>
+<%--                            <form class="form-horizontal" role="form" id="form-edit" >--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Tên tòa nhà</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="name" />--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Quận</label>--%>
+<%--                                    <div class="col-xs-2">--%>
 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Phường</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="ward"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Đường</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="street"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Kết cấu</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="structure"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Số tầng hầm</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="numberOfBasement"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Diện tích sàn</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="floorArea"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Hướng</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="direction"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Hạng</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="level"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Diện tích thuê</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="rentArea"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Giá thuê</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="rentPrice"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Mô tả giá</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="rentpricedescription" name="rentpricedescription" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Phí dịch vụ</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="servicefee" name="servicefee" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Phí ô tô</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="carfee" name="carfee" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Phí mô tô</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="motorbikefee" name="motorbikefee" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Phí ngoài giờ</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="overtimefee" name="overtimefee" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Tiền điện</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="electricityfee" name="electricityfee" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Tên quản lý</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="managerName"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">SĐT quản lý</label>
-                                    <div class="col-xs-9">
-                                        <form:input class="form-control" path="managerPhone"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Phí môi giới</label>
-                                    <div class="col-xs-9">
-                                        <input class="form-control" type="text" id="brokeragefee" name="brokeragefee" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Loại tòa nhà</label>
-                                    <div class="col-xs-9">
-                                        <form:checkboxes items="${typeCodes}" path="typeCode" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3">Ghi chú</label>
-                                    <div class="col-xs-9">
-<%--                                        <input class="form-control" type="text" id="note" name="note">--%>
-                                        <input class="form-control" type="text" id="note" name="note" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 no-padding-right">Hình đại diện</label>
-                                    <input class="col-sm-3 no-padding-right" type="file" id="uploadImage"/>
-                                    <div class="col-sm-9">
-                                        <c:if test="${not empty buildingEdit.image}">
-                                            <c:set var="imagePath" value="/repository${buildingEdit.image}"/>
-                                            <img src="${imagePath}" id="viewImage" width="300px" height="300px" style="margin-top: 50px">
-                                        </c:if>
-                                        <c:if test="${empty buildingEdit.image}">
-                                            <img src="/admin/image/default.png" id="viewImage" width="300px" height="300px">
-                                        </c:if>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3"></label>
-                                    <div class="col-xs-9">
-                                        <c:if test="${not empty buildingEdit.id}">
-                                            <button type="button" class="btn btn-info" id="btnAddOrUpdateBuilding">Cập nhật tòa nhà</button>
-                                            <button type="button" class="btn btn-info" id="btnCancel">Hủy thao tác</button>
-                                        </c:if>
-                                        <c:if test="${empty buildingEdit.id}">
-                                            <button type="button" class="btn btn-info" id="btnAddOrUpdateBuilding">Thêm mới</button>
-                                            <button type="button" class="btn btn-info" id="btnCancel">Hủy thao tác</button>
-                                        </c:if>
-                                    </div>
-                                </div>
-                                <form:hidden path="id" id="buildingId"/>
-                            </form>
+<%--                                        <form:select class="form-control" path="district">--%>
+<%--                                             <c:if test="${not empty buildingEdit.id}">--%>
+<%--                                            <form:option value="">${buildingEdit.district}</form:option>--%>
+<%--                                          </c:if>--%>
+<%--                                          <c:if test="${empty buildingEdit.id}">--%>
+<%--                                            <form:option value="">---Chọn Quận---</form:option>--%>
+<%--                                          </c:if>--%>
+
+<%--                                            <form:options items="${districts}"/>--%>
+<%--                                        </form:select>--%>
 
 
-                        </div>
-                    </form:form>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Phường</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="ward"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Đường</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="street"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Kết cấu</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="structure"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Số tầng hầm</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="numberOfBasement"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Diện tích sàn</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="floorArea"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Hướng</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="direction"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Hạng</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="level"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Diện tích thuê</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="rentArea"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Giá thuê</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="rentPrice"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Mô tả giá</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <input class="form-control" type="text" id="rentpricedescription" name="rentpricedescription" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Phí dịch vụ</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <input class="form-control" type="text" id="servicefee" name="servicefee" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Phí ô tô</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <input class="form-control" type="text" id="carfee" name="carfee" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Phí mô tô</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <input class="form-control" type="text" id="motorbikefee" name="motorbikefee" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Phí ngoài giờ</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <input class="form-control" type="text" id="overtimefee" name="overtimefee" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Tiền điện</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <input class="form-control" type="text" id="electricityfee" name="electricityfee" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Tên quản lý</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="managerName"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">SĐT quản lý</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:input class="form-control" path="managerPhone"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Phí môi giới</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <input class="form-control" type="text" id="brokeragefee" name="brokeragefee" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Loại tòa nhà</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <form:checkboxes items="${typeCodes}" path="typeCode" />--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3">Ghi chú</label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--&lt;%&ndash;                                        <input class="form-control" type="text" id="note" name="note">&ndash;%&gt;--%>
+<%--                                        <input class="form-control" type="text" id="note" name="note" value="">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-sm-3 no-padding-right">Hình đại diện</label>--%>
+<%--                                    <input class="col-sm-3 no-padding-right" type="file" id="uploadImage"/>--%>
+<%--                                    <div class="col-sm-9">--%>
+<%--                                        <c:if test="${not empty buildingEdit.image}">--%>
+<%--                                            <c:set var="imagePath" value="/repository${buildingEdit.image}"/>--%>
+<%--                                            <img src="${imagePath}" id="viewImage" width="300px" height="300px" style="margin-top: 50px">--%>
+<%--                                        </c:if>--%>
+<%--                                        <c:if test="${empty buildingEdit.image}">--%>
+<%--                                            <img src="/admin/image/default.png" id="viewImage" width="300px" height="300px">--%>
+<%--                                        </c:if>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="col-xs-3"></label>--%>
+<%--                                    <div class="col-xs-9">--%>
+<%--                                        <c:if test="${not empty buildingEdit.id}">--%>
+<%--                                            <button type="button" class="btn btn-info" id="btnAddOrUpdateBuilding">Cập nhật tòa nhà</button>--%>
+<%--                                            <button type="button" class="btn btn-info" id="btnCancel">Hủy thao tác</button>--%>
+<%--                                        </c:if>--%>
+<%--                                        <c:if test="${empty buildingEdit.id}">--%>
+<%--                                            <button type="button" class="btn btn-info" id="btnAddOrUpdateBuilding">Thêm mới</button>--%>
+<%--                                            <button type="button" class="btn btn-info" id="btnCancel">Hủy thao tác</button>--%>
+<%--                                        </c:if>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            <form:hidden path="id" id="buildingId"/>--%>
+<%--                        </div>--%>
+<%--                    </form:form>--%>
 
-                </div>
+<%--                </div>--%>
 
 
-            </div><!-- /.page-content -->
-        </div>
-    </div><!-- /.main-content -->
+<%--            </div><!-- /.page-content -->--%>
+<%--        </div>--%>
+<%--    </div><!-- /.main-content -->--%>
 
-</div><!-- /.main-container -->
+<%--</div><!-- /.main-container -->--%>
 
 <!-- Modal -->
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style=font-size:20px;">

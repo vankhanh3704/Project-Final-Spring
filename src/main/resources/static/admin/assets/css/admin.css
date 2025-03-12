@@ -275,43 +275,64 @@ main {
     border-radius: 5px !important;
 }
 
-/* SCSS cho phân trang */
-.pagination-container {
-    margin-top: 20px;
+
+/* Phần tử chứa phân trang */
+.dataTables_paginate {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 14px;
     display: flex;
-    justify-content: center;
-}
-.pagination-container .pagination {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-.pagination-container .pagination .ellipsis {
-    padding: 8px 12px;
-    color: #6c757d;
-    user-select: none;
-}
-.pagination-container .pagination .page-number {
-    min-width: 40px;
-}
-.pagination-container .pagination .page-nav, .pagination-container .pagination .page-number {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    background: #f8f9fa;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.pagination-container .pagination .page-nav:hover:not(.active), .pagination-container .pagination .page-number:hover:not(.active) {
-    background: #e9ecef;
-}
-.pagination-container .pagination .page-nav.active, .pagination-container .pagination .page-number.active {
-    background: #007bff;
-    color: white;
-}
-.pagination-container .pagination .page-numbers {
-    display: flex;
-    gap: 5px;
+    justify-content: flex-end;
 }
 
+/* Thông tin số lượng bản ghi */
+.infos {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+/* Danh sách phân trang */
+.pagination {
+
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+/* Các nút phân trang */
+.pagination .paginate_button {
+    margin: 0 2px;
+}
+
+.pagination .paginate_button a {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Nút phân trang khi hover */
+.pagination .paginate_button a:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Nút phân trang hiện tại (trang đang được chọn) */
+.pagination .paginate_button.active a {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    cursor: default;
+}
+
+/* Nút phân trang bị vô hiệu hóa */
+.pagination .paginate_button.disabled a {
+    color: #ccc;
+    cursor: not-allowed;
+    pointer-events: none;
+}

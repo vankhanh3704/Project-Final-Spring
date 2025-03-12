@@ -40,6 +40,22 @@ public class HomeController {
 	@Autowired
 	private BuildingSearchResponseConverter buildingSearchResponseConverter;
 
+//
+//	private ModelAndView setupModelAndView(String viewName, BuildingSearchRequest buildingSearchRequest) throws IOException {
+//		ModelAndView mav = new ModelAndView(viewName);
+//		mav.addObject("modelSearch", buildingSearchRequest);
+//
+//		// Xuống DB lấy dữ liệu
+//		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+//		mav.addObject("buildingList", responseList);
+//		mav.addObject("listStaffs", userService.getStaffs());
+//		mav.addObject("districts", District.type());
+//		mav.addObject("typeCodes", TypeCode.type());
+//
+//		return mav;
+//	}
+
+
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView("web/home");
@@ -55,8 +71,15 @@ public class HomeController {
 	}
 
 	@GetMapping(value="/gioi-thieu")
-	public ModelAndView introduceBuilding(){
+	public ModelAndView introduceBuilding(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException{
 		ModelAndView mav = new ModelAndView("web/introduce");
+		mav.addObject("modelSearch", buildingSearchRequest);
+		//Xuong DB Lay Data ok roi
+		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+		mav.addObject("buildingList", responseList);
+		mav.addObject("listStaffs", userService.getStaffs());
+		mav.addObject("districts", District.type());
+		mav.addObject("typeCodes", TypeCode.type());
 		return mav;
 	}
 
@@ -74,15 +97,28 @@ public class HomeController {
 	}
 
 	@GetMapping(value="/tin-tuc")
-	public ModelAndView news(){
+	public ModelAndView news(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView("/web/news");
+		mav.addObject("modelSearch", buildingSearchRequest);
+		//Xuong DB Lay Data ok roi
+		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+		mav.addObject("buildingList", responseList);
+		mav.addObject("listStaffs", userService.getStaffs());
+		mav.addObject("districts", District.type());
+		mav.addObject("typeCodes", TypeCode.type());
 		return mav;
 	}
 
 	@GetMapping(value="/lien-he")
-	public ModelAndView contact()
-	{
+	public ModelAndView contact(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView("/web/contact");
+		mav.addObject("modelSearch", buildingSearchRequest);
+		//Xuong DB Lay Data ok roi
+		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+		mav.addObject("buildingList", responseList);
+		mav.addObject("listStaffs", userService.getStaffs());
+		mav.addObject("districts", District.type());
+		mav.addObject("typeCodes", TypeCode.type());
 		return mav;
 	}
 

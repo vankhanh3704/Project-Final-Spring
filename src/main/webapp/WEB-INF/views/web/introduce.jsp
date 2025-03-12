@@ -1,276 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@include file="/common/taglib.jsp"%>
+         pageEncoding="UTF-8" %>
+<%@include file="/common/taglib.jsp" %>
+<c:url var="productListURL" value="/san-pham"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu</title>
-
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            font-family: "Roboto",sans-serif;
-        }
-
-        :root {
-            --primary-color: #35BF76;
-            --color-text: #434A6E;
-        }
-
-        .intro {
-            background-image: url(//bizweb.dktcdn.net/100/328/362/themes/894751/assets/bg_breadcrumb.png?1664350964800);
-            background-size: cover;
-            background-position: center top;
-            padding: 25px 0px;
-            background-repeat: no-repeat;
-            min-height: 320px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            float: left;
-            flex-flow: column;
-        }
-
-        .title-page {
-            font-weight: 700;
-            font-size: 48px;
-            font-family: "Roboto",sans-serif;
-            color: #fff;
-        }
-
-        .desc-intro {
-            font-family: "Roboto",sans-serif;
-            margin: 0;
-            font-size: 16px;
-            padding: 15px 0px 15px;
-            border-radius: 0;
-            font-weight: 400;
-            line-height: 24px;
-            background-color: transparent;
-            width: 100%;
-            text-align: center;
-        }
-
-        .col-xs-12 {
-            width: 100%;
-        }
-
-        .desc-intro li {
-            display: inline;
-        }
-        .home:hover {
-            color: var(--primary-color)
-        }
-
-        .intro-item {
-            color: var(--primary-color);
-        }
-
-        .page-content {
-
-            /* margin-top: 5px; */
-        }
-
-        .title-head {
-            font-size: 20px;
-        }
-
-        .hover-title-header:hover {
-            text-decoration: underline;
-            color: var(--primary-color);
-        }
-
-        .desc-page-container p {
-            width: 100%;
-            float: left;
-            margin-bottom: 50px;
-        }
-
-        .item-desc-page-content {
-            font-size: 14px;
-        }
-
-    </style>
-</head>
+<%--<head>--%>
+<%--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
+<%--    <meta charset="UTF-8">--%>
+<%--    <meta http-equiv="X-UA-Compatible" content="IE=edge">--%>
+<%--    <meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
+<%--    <title>Giới thiệu</title>--%>
+<%--</head>--%>
 <body>
-<div class="page-wrapper">
-    <div class="intro text-center">
-        <div class="title-page">Giới thiệu</div>
-        <div class="row">
-            <div class="col-xs-12 a-left">
-                <ul class="desc-intro">
-                    <li class="home" style="color: #fff;">
-                        <a href="/trang-chu#"><span style="color: #fff;">Trang chủ</span></a>
-                        <span class="mx-1"> /</span>
-                    </li>
-                    <li class="intro-item"><span>Giới thiệu</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <!-- CONTENT  -->
-    <div class="page-content">
+    <div class="introduce">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-12">
-                    <h1 class="title-head mt-5"><a class="hover-title-header" href="./GioiThieu.html"><strong>Giới
-                        thiệu</strong></a>
-                    </h1>
-                    <div class="desc-page-content">
-                        <div class="content-page rte minpage">
-                            <p>Tòa nhà cao nhất Việt Nam The Sky Land&nbsp; 90&nbsp;của Công ty cổ phần công
-                                nghệ&nbsp;Sapo chính thức cho khách hàng đặt giữ chỗ chọn mua đợt đầu vào ngày
-                                Event&nbsp;<b>1/7/2016</b>. Sự kiện diễn ra lúc 18h tại nhà mẫu Sapohomes Central
-                                Park, số 208 đường Nguyễn Chí Thanh, TP Hà Nội&nbsp;.– Đợt đầu đặt chỗ tầng 36 và 37
-                                chỉ dành cho người nước ngoài. Các tầng còn lại tất cả các khách hàng chọn căn đặt
-                                cọc từ ngày&nbsp;<b>19/7/2016</b>.</p>
-                            <p><b>MỞ BÁN:</b></p>
-                            <p>+ Ngày công bố giá bán và cho khách đặt cọc từ:&nbsp;<b>19/7/2016</b></p>
-                            <p>+ Ngày tổ chức event mở bán:&nbsp;<b>25/7/2016</b></p>
-                            <p>– Tòa nhà The Sky Land&nbsp; 90 tầng sở hữu những căn hộ đẳng cấp bậc nhất Việt Nam.
-                                Được nhiều các nhà đầu tư trong và ngoài nước đặc biệt quan tâm. Khi mở bán kỳ vọng
-                                sẽ trở thành hiện tượng của thị trường bất động sản trong nhiều năm trở lại đây.</p>
-                            <p><b>1. Tổng quan:</b></p>
-                            <p>– Tổng chiều cao thiết kế: 512&nbsp;m</p>
-                            <p>– Số tầng: 90 tầng nổi và 4 tầng hầm</p>
-                            <p>– Tổng diện tích sàn (không gồm hầm): 198.200 m2</p>
-                            <p><b>2. Diện tích căn hộ Tòa SkyLand 90:</b></p>
-                            <p>– Thiết kế từ: 1-2-3-4 phòng ngủ và Sky villa</p>
-                            <p>– Loại 1 phòng ngủ: 54-55-66 m2</p>
-                            <p>– Loại 2 phòng ngủ: 78-87-90-94 m2</p>
-                            <p>– Loại 3 phòng ngủ: 106-109-133-145 m2</p>
-                            <p>– Loại 4 phòng ngủ: 144-171-172-173-186-192-249-258-269-407-420-431 m2</p>
-                            <p><b>3. Loại hình phát triển </b><strong>The Sky Land&nbsp; 90</strong><b>:</b></p>
-                            <p>– Trung tâm thương mại, rạp chiếu phim, sân trượt băng trong nhà, gym (tầng B1,1, 2,
-                                3)</p>
-                            <p>– Khu club house dành cho cư dân gồm hệ thống hồ bơi, gym, spa, bar và lounge ngoài
-                                trời (tầng 4).</p>
-                            <p>– Sảnh lounge tiêu chuẩn 5 sao và nhà sinh hoạt cộng đồng dành cho cư dân, nhà hàng
-                                cao cấp (tầng 5).</p>
-                            <p>– Khu căn hộ hiện đại (tầng 6 – 40) với căn hộ 1 – 4 phòng ngủ, sky villa.</p>
-                            <p>– Khách sạn SapoPearl 5 sao (tầng 42 – 76).</p>
-                            <p>– Đài quan sát (tầng 79 – 90).</p>
-                            <p><b>4. Thông tin kỹ thuật:</b></p>
-                            <p>Số lượng căn hộ/sàn: 10 – 20 căn.</p>
-                            <p>Số lượng thang máy: 26 thang máy.</p>
-                            <p>Số lượng thang thoát hiểm: 2 thang.</p>
-                            <p>Chiều rộng hành lang: 1,8m.</p>
-                            <p>Tầng hầm để xe (tầng B2, B3).</p>
-                            <p><b>Thông tin khác:</b></p>
-                            <p>–&nbsp;<b>Đơn vị thiết kế:</b>&nbsp;Tập đoàn Atkins (Anh Quốc)</p>
-                            <p>–&nbsp;<b>Năm khởi công:</b>&nbsp;2016</p>
-                            <p>–&nbsp;<b>Năm hoàn thành:</b>&nbsp;Dự kiến 2019</p>
-                        </div>
+                <div class="col-xl-8 col-lg-8" >
+                    <div class="introduce__main">
+                        <div class="inner-title" style="margin-top: 0;">Giới thiệu công ty</div>
+                        <div class="introduce__content">
+                            <div style="margin-bottom: 5px">
+                                <strong>Tên công ty:</strong>
+                                <span>Khánh Văn Real Estate</span>
+                            </div>
+                            <div style="margin-bottom: 5px">
+                                <strong>Vị trí:</strong>
+                                <span>Trụ sở chính tọa lạc tại số 19, Ngõ 35 Trần Thái Tông, Dịch Vọng, Cầu Giấy, Hà Nội.</span>
+                            </div>
+                            <div style="margin-bottom: 5px">
+                                <strong>Sứ mệnh:</strong>
+                                <span>FutureLand Real Estate cam kết mang đến cho khách hàng những giải pháp bất động sản toàn diện và chất lượng nhất. Chúng tôi luôn đặt khách hàng làm trọng tâm và nỗ lực không ngừng để tạo dựng những giá trị bền vững cho cộng đồng và môi trường.</span>
+                            </div>
+                            <strong>Dịch vụ cung cấp:</strong>
+                            <ul>
+                                <li>
+                                    <strong>Mua bán và cho thuê bất động sản:</strong>
+                                    <span>Tư vấn và hỗ trợ khách hàng tìm kiếm, mua bán, cho thuê căn hộ, biệt thự, đất nền, và các loại hình bất động sản khác.</span>
+                                </li>
+                                <li>
+                                    <strong>Phát triển dự án:</strong>
+                                    <span>Tham gia vào quá trình lập kế hoạch, thiết kế, xây dựng và quản lý các dự án bất động sản thương mại và dân cư.</span>
+                                </li>
+                                <li>
+                                    <strong>Quản lý tài sản: </strong>
+                                    <span>Cung cấp các dịch vụ quản lý và bảo trì tài sản, đảm bảo giá trị bất động sản luôn được duy trì và phát triển.</span>
+                                </li>
+                                <li>
+                                    <strong>Tư vấn đầu tư: </strong>
+                                    <span>Hỗ trợ khách hàng phân tích, đánh giá và đưa ra các quyết định đầu tư bất động sản hiệu quả và bền vững.</span>
+                                </li>
+                            </ul>
+                            <strong>Điểm nổi bật:</strong>
+                            <ul>
+                                <li>
+                                    <strong>Kinh nghiệm và uy tín:</strong>
+                                    <span> Với hơn 10 năm hoạt động trong lĩnh vực bất động sản, FutureLand Real Estate đã xây dựng được uy tín và niềm tin vững chắc từ khách hàng.</span>
+                                </li>
+                                <li>
+                                    <strong>Đội ngũ chuyên nghiệp:</strong>
+                                    <span> Đội ngũ nhân viên của chúng tôi được đào tạo chuyên sâu, có kinh nghiệm và luôn tận tâm với công việc.</span>
+                                </li>
+                                <li>
+                                    <strong>Mạng lưới đối tác rộng khắp: </strong>
+                                    <span>Hợp tác với các chủ đầu tư, ngân hàng, và các tổ chức tài chính lớn để mang đến những giải pháp tốt nhất cho khách hàng.</span>
+                                </li>
+                                <li>
+                                    <strong>Công nghệ tiên tiến: </strong>
+                                    <span>Ứng dụng công nghệ 4.0 trong quản lý và vận hành, giúp tối ưu hóa quy trình và nâng cao hiệu quả công việc.</span>
+                                </li>
+                            </ul>
+                            <strong>Cam kết:</strong>
+                            <span>Khánh Văn Real Estate cam kết mang đến cho khách hàng sự hài lòng tối đa với những sản phẩm và dịch vụ chất lượng, đồng thời luôn lắng nghe và đáp ứng mọi nhu cầu của khách hàng.</span>
 
+                        </div>
                     </div>
 
                 </div>
+                <div class="col-xl-4 col-lg-4">
+                <div class="pn-sidebar">
+                    <div class="pn-sidebar__title">
+                        Tìm kiếm BĐS
+                    </div>
+                    <form:form modelAttribute="modelSearch" id="listForm" action="${productListURL}" method="GET"
+                               class="pn-sidebar__form">
+                        <form:input path="name" placeholder="Nhập tên BĐS"
+                        />
+                        <form:select path="district">
+                            <form:option value="">---Chọn tỉnh---</form:option>
+                            <form:options items="${districts}"></form:options>
+                        </form:select>
+                        <form:input path="ward" placeholder="--Quận/Huyện--"/>
+                        <form:input path="street" placeholder="--Đường/Phố--"/>
+                        <form:input path="" placeholder="--Phường/Xã--"/>
+                        <form:input type="number" path="areaFrom" placeholder="Diện tích..."/>
+                        <form:input type="number" path="rentPriceFrom" placeholder="Mức giá..."/>
+                        <div class="pn-sidebar__form--button">
+                            <button class="button button-one" id="btnSearchBuilding">Tìm kiếm</button>
+                        </div>
+                    </form:form>
+                </div>
+            </div>
             </div>
         </div>
     </div>
-    <!-- FOOTER  -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="top-footer text-center mt-0">
-                <div class="logo logo-footer pt-5">
-                    <a href="./ViewHome.html"><img src="https://bizweb.dktcdn.net/100/328/362/themes/894751/assets/logo_footer.png?1676257083798 alt="logo-footer"></a>
-                    <p class="desc-logo-footer mt-3">Với hơn 10 năm kinh nghiệm, SkyLand tự hào là sàn
-                        mua
-                        bán, giao dịch và quảng cáo
-                        bất động sản hàng đầu tại Việt Nam</p>
-                    <div class="item-footer mt-5">
-                        <div class="row">
-                            <div class="col-12 col-md-4 text-center">
-                                <div class="icon-footer">
-                                    <img src="https://bizweb.dktcdn.net/100/328/362/themes/894751/assets/place_maps.png?1676257083798" alt="">
-                                </div>
-                                <div class="content-center-footer">
-                                    <p class="mb-1 mt-3">Trụ sở chính</p>
-                                    <p class="desc-footer">Số 46 Man Thiện, TP Thủ Đức, TP HCM</p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4 text-center">
-                                <div class="icon-footer">
-                                    <img src="https://bizweb.dktcdn.net/100/328/362/themes/894751/assets/place_phone.png?1676257083798" alt="">
-                                </div>
-                                <div class="content-center-footer">
-                                    <p class="mb-1 mt-3">Hotline</p>
-                                    <p class="desc-footer"><a class="a-text" href="#">098828</a></p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4 text-center">
-                                <div class="icon-footer">
-                                    <img src="https://bizweb.dktcdn.net/100/328/362/themes/894751/assets/place_email.png?1676257083798" alt="">
-                                </div>
-                                <div class="content-center-footer">
-                                    <p class="mb-1 mt-3">Email</p>
-                                    <p class="desc-footer"><a class="a-text" href="#">vsh@gmail.com</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div class="border-bottom mb-5 mt-4"></div>
-                </div>
-            </div>
-            <div class="bottom-footer container">
-                <div class="row">
-                    <div class="col-12 col-md-3">
-                        <h4 class="title-item-bottom-footer">Thông tin công ty</h4>
-                        <p class="desc-item-bottom-footer desc-1"><a class="a-text" href="">Trang
-                            chủ</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Giới thiệu</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Dự án bất động
-                            sản</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Tin tức</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Liên hệ</a></p>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <h4 class="title-item-bottom-footer">Chính sách hoạt động</h4>
-                        <p class="desc-item-bottom-footer desc-1"><a class="a-text" href="">Trang
-                            chủ</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Giới thiệu</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Dự án bất động
-                            sản</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Tin tức</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Liên hệ</a></p>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <h4 class="title-item-bottom-footer">Hỗ trợ khách hàng</h4>
-                        <p class="desc-item-bottom-footer desc-1"><a class="a-text" href="">Trang
-                            chủ</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Giới thiệu</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Dự án bất động
-                            sản</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Tin tức</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Liên hệ</a></p>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <h4 class="title-item-bottom-footer">Kết nối với chúng tôi</h4>
-                        <p class="desc-item-bottom-footer desc-1"><a class="a-text" href="">Trang
-                            chủ</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Giới thiệu</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Dự án bất động
-                            sản</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Tin tức</a></p>
-                        <p class="desc-item-bottom-footer"><a class="a-text" href="">Liên hệ</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- End Introduce -->
+<%--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"--%>
+<%--        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"--%>
+<%--        crossorigin="anonymous"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"--%>
+<%--        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"--%>
+<%--        crossorigin="anonymous"></script>--%>
 </body>
 </html>

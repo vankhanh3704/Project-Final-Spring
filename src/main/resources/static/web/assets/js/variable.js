@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dữ liệu mẫu từ API hoặc cơ sở dữ liệu
     const data = [
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',
@@ -127,7 +127,23 @@ document.addEventListener('DOMContentLoaded', () => {
             address: 'Quận 7, Hồ Chí Minh'
         },
         {
-            image: 'assets/images/building-1.jpg',
+            image: 'web/assets/images/building-1.jpg',
+            label: 'VIP',
+            title: 'Bán CH giá tốt view sông đẹp tại Q7',
+            price: '2,97 tỷ',
+            area: '67 m²',
+            address: 'Quận 7, Hồ Chí Minh'
+        },
+        {
+            image: 'web/assets/images/building-1.jpg',
+            label: 'VIP',
+            title: 'Bán CH giá tốt view sông đẹp tại Q7',
+            price: '2,97 tỷ',
+            area: '67 m²',
+            address: 'Quận 7, Hồ Chí Minh'
+        },
+        {
+            image: 'web/assets/images/building-1.jpg',
             label: 'VIP',
             title: 'Bán CH giá tốt view sông đẹp tại Q7',
             price: '2,97 tỷ',

@@ -1,5 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+:root {
+    --color-text: #223d3c;
+    --color-one: #055699;
+    --color-two: #E1BD4E;
+    --color-bg: #fff;
+    --font-family: "Open Sans", serif;
+    --color-border: #CECDCC;
+}
 
 * {
     box-sizing: border-box;

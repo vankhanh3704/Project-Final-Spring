@@ -34,13 +34,20 @@
 							</li>
 						</ul>
 					</div>
+					<security:authorize access = "isAnonymous()">
 					<div class="header__login">
-
 						<a href="<c:url value='/login'/>">
 							<i class="fa-regular fa-circle-user"></i>
 							Đăng nhập
 						</a>
 					</div>
+					</security:authorize>
+					<security:authorize access = "isAuthenticated()">
+					<div class="header__login">
+						<div class="nav-item"><a class="nav-link" href="#"> Xin chào, <%=SecurityUtils.getPrincipal().getUsername()%></a></div>
+						<div class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">Thoát</a></div>
+					</div>
+					</security:authorize>
 					<div class="header__bar">
 						<i class="fa-solid fa-bars"></i>
 					</div>
@@ -50,67 +57,3 @@
 	</div>
 	</div>
 </header>
-
-<%--<nav class="navbar-expand-lg navbar-dark fixed-top">--%>
-<%--		<div class="row navbar">--%>
-<%--			<div class="col-12 col-md-3">--%>
-<%--				<div class="logo">--%>
-<%--					<a href="">--%>
-<%--						<img src="https://bizweb.dktcdn.net/100/328/362/themes/894751/assets/logo.png?1676257083798"--%>
-<%--							 alt="">--%>
-<%--					</a>--%>
-<%--				</div>--%>
-<%--			</div>--%>
-<%--			<div class="col-12 col-md-6">--%>
-<%--				<div class="item-menu">--%>
-<%--					<div class="nav nav1">--%>
-<%--						<div class="nav-item p-2">--%>
-<%--							<a class="nav-item-link" href="/trang-chu">--%>
-<%--								<span style="color: var(--primary-color);">Trang chủ</span>--%>
-<%--							</a>--%>
-<%--						</div>--%>
-<%--						<div class="nav-item p-2">--%>
-<%--							<a href='<c:url value='/gioi-thieu'/>'>--%>
-<%--								&lt;%&ndash;<span>Giới thiệu</span>&ndash;%&gt;--%>
-<%--								<span style="color: var(--primary-color);">Giới thiệu</span>--%>
-<%--							</a>--%>
-<%--						</div>--%>
-<%--						<div class="nav-item p-2">--%>
-<%--							&lt;%&ndash;<a class="nav-item-link" href="./Duan.html">&ndash;%&gt;--%>
-<%--							<a href='<c:url value='/san-pham'/>'>--%>
-<%--								&lt;%&ndash;<span>Sản phẩm</span>&ndash;%&gt;--%>
-<%--								<span style="color: var(--primary-color);">Sản phẩm</span>--%>
-<%--							</a>--%>
-<%--						</div>--%>
-<%--						<div class="nav-item p-2">--%>
-<%--							<a href='<c:url value='/tin-tuc'/>'>--%>
-<%--								&lt;%&ndash;<span>Tin tức</span>&ndash;%&gt;--%>
-<%--								<span style="color: var(--primary-color);">Tin tức</span>--%>
-<%--							</a>--%>
-<%--						</div>--%>
-<%--						<div class="nav-item p-2">--%>
-<%--							<a href='<c:url value='/lien-he'/>'>--%>
-<%--								&lt;%&ndash;<span>Liên hệ</span>&ndash;%&gt;--%>
-<%--									<span style="color: var(--primary-color);">Liên hệ</span>--%>
-<%--							</a>--%>
-<%--						</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-<%--			</div>--%>
-<%--			<div class="collapse navbar-collapse" id="navbarResponsive">--%>
-<%--				<ul class="navbar-nav ml-auto">--%>
-<%--					&lt;%&ndash;<li class="nav-item active"><a class="nav-link" href="/trang-chu#">Trang chủ&ndash;%&gt;--%>
-<%--						&lt;%&ndash;<span class="sr-only">(current)</span>&ndash;%&gt;--%>
-<%--					&lt;%&ndash;</a></li>&ndash;%&gt;--%>
-<%--					<security:authorize access = "isAnonymous()">--%>
-<%--						<li class><a class="nav-link" href="<c:url value='/login'/>">Đăng nhập</a></li>--%>
-<%--						<li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>--%>
-<%--					</security:authorize>--%>
-<%--					<security:authorize access = "isAuthenticated()">--%>
-<%--						<li class="nav-item"><a class="nav-link" href="#"> Xin chào <%=SecurityUtils.getPrincipal().getUsername()%></a></li>--%>
-<%--						<li class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">Thoát</a></li>--%>
-<%--					</security:authorize>--%>
-<%--				</ul>--%>
-<%--			</div>--%>
-<%--		</div>--%>
-<%--</nav>--%>

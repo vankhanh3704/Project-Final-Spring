@@ -1,0 +1,15 @@
+.introduce {
+    margin: 70px 0;
+}
+.introduce__content {
+    font-size: 18px;
+}
+.introduce__content br {
+    margin-top: 100px;
+}
+.introduce__content ul li strong {
+    font-weight: 600;
+}
+.introduce ul li strong{
+    padding-left: 20px;
+}

@@ -20,6 +20,7 @@
         margin-top: 20px;
         text-align: center;
     }
+
     .pagination a, .pagination span {
         display: inline-block;
         padding: 5px 10px;
@@ -28,15 +29,18 @@
         text-decoration: none;
         color: #007bff;
     }
+
     .pagination a:hover {
         background-color: #007bff;
         color: white;
     }
+
     .pagination .current-page {
         background-color: #007bff;
         color: white;
         border-color: #007bff;
     }
+
     .pagination .ellipsis {
         padding: 5px 10px;
         margin: 0 5px;
@@ -47,14 +51,15 @@
         <div class="row">
             <div class="col-xl-8 col-lg-8">
                 <div class="product__main">
+
                     <div class="product__content">
                         <div class="product__content--title" style="margin-top: 0;">Danh sách sản phẩm</div>
                         <select name="" id="filter" class="product__content--sort">
-                            <option value="mac-dinh">-- Mặc định --</option>
-                            <option value="thap-cao">Giá từ thấp tới cao</option>
-                            <option value="cao-thap">Giá từ cao tới thấp</option>
-                            <option value="dien-tich-tang">Diện tích tăng dần</option>
-                            <option value="dien-tich-giam">Diện tích giảm dần</option>
+                            <option value="mac-dinh" ${sort == null ? 'selected' : ''}>-- Mặc định --</option>
+                            <option value="thap-cao" ${sort == 'thap-cao' ? 'selected' : ''}>Giá từ thấp tới cao</option>
+                            <option value="cao-thap" ${sort == 'cao-thap' ? 'selected' : ''}>Giá từ cao tới thấp</option>
+                            <option value="dien-tich-tang" ${sort == 'dien-tich-tang' ? 'selected' : ''}>Diện tích tăng dần</option>
+                            <option value="dien-tich-giam" ${sort == 'dien-tich-giam' ? 'selected' : ''}>Diện tích giảm dần</option>
                         </select>
                     </div>
                     <div class="product__list-box" id="building-list">
@@ -97,10 +102,13 @@
                     </div>
                     <c:set var="queryParams" value=""/>
                     <c:forEach var="entry" items="${param}">
-                    <c:if test="${entry.key != 'page' && entry.key != 'maxPageItems'}">
-                        <c:set var="queryParams" value="${queryParams}&${entry.key}=${entry.value}"/>
-                    </c:if>
+                        <c:if test="${entry.key != 'page' && entry.key != 'maxPageItems'}">
+                            <c:set var="queryParams" value="${queryParams}&${entry.key}=${entry.value}"/>
+                        </c:if>
                     </c:forEach>
+<%--                    <c:forEach var="i" begin="1" end="${totalPages}">--%>
+<%--                        <a href="<c:url value='/san-pham?page=${i}&size=${pageSize}&sort=${sort}'/>">${i}</a>--%>
+<%--                    </c:forEach>--%>
                     <!-- Phần tử phân trang -->
                     <div class="pagination">
                         <!-- Nút "Đầu" và "Trước" -->
@@ -162,8 +170,7 @@
                         </c:if>
                     </div>
                 </div>
-                <p>Tổng số trang: ${totalPages}</p>
-                <p>Trang hiện tại: ${currentPage}</p>
+
 
             </div>
             <div class="col-xl-4 col-lg-4">
@@ -196,19 +203,7 @@
 
 <script src="web/assets/js/Sort-Product.js">
 </script>
-<script>
-    $(document).ready(function () {
-        var queryParams = window.location.search.replace(/[\?&]page=\d+/g, ''); // Xóa page cũ
-        $('#pagination').twbsPagination({
-            totalPages: ${totalPages},
-            visiblePages: 5,
-            startPage: ${currentPage},
-            onPageClick: function (event, page) {
-                window.location.href = "/san-pham?page=" + page + queryParams;
-            }
-        });
-    });
-</script>
+
 </body>
 
 </html>

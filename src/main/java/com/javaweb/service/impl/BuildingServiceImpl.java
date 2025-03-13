@@ -19,10 +19,7 @@ import com.javaweb.utils.StringUtils;
 import com.javaweb.utils.UploadFileUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +28,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BuildingServiceImpl implements BuildingService {
@@ -99,6 +98,32 @@ public class BuildingServiceImpl implements BuildingService {
                 building.setImageBase64(base64Image);
             }
             result.add(building);
+        }
+        Sort.Order order = Optional.ofNullable(pageable.getSort())
+                .flatMap(sort -> sort.stream().findFirst()) // Lấy phần tử đầu tiên nếu có
+                .orElse(null); // Không có sắp xếp mặc định
+
+        if (order != null) {
+            Comparator<BuildingSearchResponse> comparator;
+            switch (order.getProperty()) {
+                case "floorArea":
+                    comparator = Comparator.comparing(BuildingSearchResponse::getFloorArea);
+                    break;
+                case "rentPrice":
+                default:
+                    comparator = Comparator.comparing(BuildingSearchResponse::getRentPrice);
+                    break;
+            }
+            // Nếu sort theo DESC thì đảo ngược comparator
+            if (order.getDirection() == Sort.Direction.DESC) {
+                comparator = comparator.reversed();
+            }
+
+            try {
+                result.sort(comparator);
+            } catch (NullPointerException e) {
+                System.err.println("Lỗi NullPointerException khi sắp xếp danh sách: " + e.getMessage());
+            }
         }
         // Tính toán phân trang
         int total = result.size(); // Tổng số bản ghi

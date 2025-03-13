@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -111,14 +112,32 @@ public class HomeController {
 	public ModelAndView buildingList(
 			BuildingSearchRequest buildingSearchRequest,
 			@RequestParam(defaultValue = "1") int page, // Trang hiện tại, mặc định là 1
-			@RequestParam(defaultValue = "1") int size, // Số lượng sản phẩm trên mỗi trang, mặc định là 10
+			@RequestParam(defaultValue = "2") int size, // Số lượng sản phẩm trên mỗi trang, mặc định là 10
+			@RequestParam(required = false) String sort,
 			HttpServletRequest request) throws IOException {
 
 		ModelAndView mav = new ModelAndView("/web/list");
 		mav.addObject("modelSearch", buildingSearchRequest);
+		Sort sorting = Sort.unsorted(); // Mặc định không sắp xếp
+		if (sort != null) {
+			switch (sort) {
+				case "thap-cao":
+					sorting = Sort.by(Sort.Direction.ASC, "rentPrice"); // Giá từ thấp đến cao
+					break;
+				case "cao-thap":
+					sorting = Sort.by(Sort.Direction.DESC, "rentPrice"); // Giá từ cao đến thấp
+					break;
+				case "dien-tich-tang":
+					sorting = Sort.by(Sort.Direction.ASC, "floorArea"); // Diện tích tăng dần
+					break;
+				case "dien-tich-giam":
+					sorting = Sort.by(Sort.Direction.DESC, "floorArea"); // Diện tích giảm dần
+					break;
+			}
+		}
 
 		// Phân trang dữ liệu
-		Pageable pageable = PageRequest.of(page - 1, size); // Pageable bắt đầu từ 0
+		Pageable pageable = PageRequest.of(page - 1, size, sorting); // Pageable bắt đầu từ 0
 		Page<BuildingSearchResponse> responsePage = buildingService.findAll(buildingSearchRequest, pageable);
 
 		// Lấy danh sách sản phẩm và tổng số trang
@@ -130,7 +149,7 @@ public class HomeController {
 		mav.addObject("totalPages", totalPages);
 		mav.addObject("currentPage", page);
 		mav.addObject("pageSize", size);
-
+		mav.addObject("sort", sort);
 		mav.addObject("listStaffs", userService.getStaffs());
 		mav.addObject("districts", District.type());
 		mav.addObject("typeCodes", TypeCode.type());

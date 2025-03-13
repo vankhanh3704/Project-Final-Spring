@@ -51,14 +51,15 @@
         <div class="row">
             <div class="col-xl-8 col-lg-8">
                 <div class="product__main">
+
                     <div class="product__content">
                         <div class="product__content--title" style="margin-top: 0;">Danh sách sản phẩm</div>
                         <select name="" id="filter" class="product__content--sort">
-                            <option value="mac-dinh">-- Mặc định --</option>
-                            <option value="thap-cao">Giá từ thấp tới cao</option>
-                            <option value="cao-thap">Giá từ cao tới thấp</option>
-                            <option value="dien-tich-tang">Diện tích tăng dần</option>
-                            <option value="dien-tich-giam">Diện tích giảm dần</option>
+                            <option value="mac-dinh" ${sort == null ? 'selected' : ''}>-- Mặc định --</option>
+                            <option value="thap-cao" ${sort == 'thap-cao' ? 'selected' : ''}>Giá từ thấp tới cao</option>
+                            <option value="cao-thap" ${sort == 'cao-thap' ? 'selected' : ''}>Giá từ cao tới thấp</option>
+                            <option value="dien-tich-tang" ${sort == 'dien-tich-tang' ? 'selected' : ''}>Diện tích tăng dần</option>
+                            <option value="dien-tich-giam" ${sort == 'dien-tich-giam' ? 'selected' : ''}>Diện tích giảm dần</option>
                         </select>
                     </div>
                     <div class="product__list-box" id="building-list">
@@ -105,6 +106,9 @@
                             <c:set var="queryParams" value="${queryParams}&${entry.key}=${entry.value}"/>
                         </c:if>
                     </c:forEach>
+<%--                    <c:forEach var="i" begin="1" end="${totalPages}">--%>
+<%--                        <a href="<c:url value='/san-pham?page=${i}&size=${pageSize}&sort=${sort}'/>">${i}</a>--%>
+<%--                    </c:forEach>--%>
                     <!-- Phần tử phân trang -->
                     <div class="pagination">
                         <!-- Nút "Đầu" và "Trước" -->
@@ -166,8 +170,7 @@
                         </c:if>
                     </div>
                 </div>
-                <p>Tổng số trang: ${totalPages}</p>
-                <p>Trang hiện tại: ${currentPage}</p>
+
 
             </div>
             <div class="col-xl-4 col-lg-4">
@@ -200,19 +203,7 @@
 
 <script src="web/assets/js/Sort-Product.js">
 </script>
-<script>
-    $(document).ready(function () {
-        var queryParams = window.location.search.replace(/[\?&]page=\d+/g, ''); // Xóa page cũ
-        $('#pagination').twbsPagination({
-            totalPages: ${totalPages},
-            visiblePages: 5,
-            startPage: ${currentPage},
-            onPageClick: function (event, page) {
-                window.location.href = "/san-pham?page=" + page + queryParams;
-            }
-        });
-    });
-</script>
+
 </body>
 
 </html>

@@ -20,6 +20,7 @@
         margin-top: 20px;
         text-align: center;
     }
+
     .pagination a, .pagination span {
         display: inline-block;
         padding: 5px 10px;
@@ -28,15 +29,18 @@
         text-decoration: none;
         color: #007bff;
     }
+
     .pagination a:hover {
         background-color: #007bff;
         color: white;
     }
+
     .pagination .current-page {
         background-color: #007bff;
         color: white;
         border-color: #007bff;
     }
+
     .pagination .ellipsis {
         padding: 5px 10px;
         margin: 0 5px;
@@ -95,13 +99,19 @@
                             </div>
                         </c:forEach>
                     </div>
-
+                    <c:set var="queryParams" value=""/>
+                    <c:forEach var="entry" items="${param}">
+                        <c:if test="${entry.key != 'page' && entry.key != 'maxPageItems'}">
+                            <c:set var="queryParams" value="${queryParams}&${entry.key}=${entry.value}"/>
+                        </c:if>
+                    </c:forEach>
                     <!-- Phần tử phân trang -->
                     <div class="pagination">
                         <!-- Nút "Đầu" và "Trước" -->
                         <c:if test="${currentPage > 1}">
-                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}"/>">Đầu</a>
-                            <a href="<c:url value="/san-pham?page=${currentPage - 1}&maxPageItems=${pageSize}"/>">Trước</a>
+                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}${queryParams}"/>">Đầu</a>
+                            <a href="<c:url value="/san-pham?page=${currentPage - 1}&maxPageItems=${pageSize}${queryParams}"/>">Trước</a>
+
                         </c:if>
 
                         <!-- Hiển thị các trang xung quanh trang hiện tại -->
@@ -123,7 +133,7 @@
 
                         <!-- Hiển thị trang đầu tiên và dấu "..." nếu cần -->
                         <c:if test="${startPage > 1}">
-                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}"/>">1</a>
+                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}${queryParams}"/>">1</a>
                             <c:if test="${startPage > 2}">
                                 <span class="ellipsis">...</span>
                             </c:if>
@@ -136,7 +146,7 @@
                                     <span class="current-page">${i}</span>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="<c:url value="/san-pham?page=${i}&maxPageItems=${pageSize}"/>">${i}</a>
+                                    <a href="<c:url value="/san-pham?page=${i}&maxPageItems=${pageSize}${queryParams}"/>">${i}</a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -146,13 +156,13 @@
                             <c:if test="${endPage < totalPages - 1}">
                                 <span class="ellipsis">...</span>
                             </c:if>
-                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}"/>">${totalPages}</a>
+                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}${queryParams}"/>">${totalPages}</a>
                         </c:if>
 
                         <!-- Nút "Sau" và "Cuối" -->
                         <c:if test="${currentPage < totalPages}">
-                            <a href="<c:url value="/san-pham?page=${currentPage + 1}&maxPageItems=${pageSize}"/>">Sau</a>
-                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}"/>">Cuối</a>
+                            <a href="<c:url value="/san-pham?page=${currentPage + 1}&maxPageItems=${pageSize}${queryParams}"/>">Sau</a>
+                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}${queryParams}"/>">Cuối</a>
                         </c:if>
                     </div>
                 </div>
@@ -192,13 +202,13 @@
 </script>
 <script>
     $(document).ready(function () {
+        var queryParams = window.location.search.replace(/[\?&]page=\d+/g, ''); // Xóa page cũ
         $('#pagination').twbsPagination({
-            totalPages: ${totalPages}, // Tổng số trang từ server
-            visiblePages: 5, // Số trang hiển thị
-            startPage: ${currentPage}, // Trang hiện tại
+            totalPages: ${totalPages},
+            visiblePages: 5,
+            startPage: ${currentPage},
             onPageClick: function (event, page) {
-                // Chuyển đến trang mới
-                window.location.href = "/san-pham?page=" + page;
+                window.location.href = "/san-pham?page=" + page + queryParams;
             }
         });
     });

@@ -15,7 +15,7 @@ import java.util.List;
 public interface BuildingService {
     ResponseDTO listStaff(Long buildingId);
     List<BuildingSearchResponse> findAllHavePage(BuildingSearchRequest buildingSearchRequest, Pageable pageable);
-    List<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest) throws IOException;
+    Page<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest, Pageable pageable) throws IOException;
     void deleteBuildings(List<Long> ids);
     BuildingDTO addOrUpdateBuilding(BuildingDTO buildingDTO);
     ResponseDTO updateAssignmentBuilding(AssignmentBuildingDTO assignmentBuildingDTO);

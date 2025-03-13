@@ -20,6 +20,7 @@ import com.javaweb.utils.UploadFileUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -86,18 +87,29 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public List<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest) throws IOException {
+    public Page<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest, Pageable pageable) throws IOException {
         List<BuildingEntity> buildingEntities = buildingRepository.findAll(buildingSearchRequest);
+
+        // Chuyển đổi danh sách BuildingEntity thành BuildingSearchResponse
         List<BuildingSearchResponse> result = new ArrayList<>();
         for (BuildingEntity item : buildingEntities) {
             BuildingSearchResponse building = buildingSearchResponseConverter.toBuildingSearchResponse(item);
             if (item.getImage() != null) {
                 String base64Image = Base64.encodeBase64String(Files.readAllBytes(Paths.get("/Users/hoangkhanhvan/Desktop/" + item.getImage())));
-                    building.setImageBase64(base64Image);
+                building.setImageBase64(base64Image);
             }
             result.add(building);
         }
-        return result;
+        // Tính toán phân trang
+        int total = result.size(); // Tổng số bản ghi
+        int start = (int) pageable.getOffset(); // Vị trí bắt đầu
+        int end = Math.min((start + pageable.getPageSize()), total); // Vị trí kết thúc
+
+        // Tạo danh sách con cho trang hiện tại
+        List<BuildingSearchResponse> pageContent = result.subList(start, end);
+
+        // Trả về đối tượng Page
+        return new PageImpl<>(pageContent, pageable, total);
     }
 
 

@@ -38,7 +38,7 @@
 	<script src="web/assets/js/jquery.slim.min.js"></script>
 	<script src="web/assets/js/variable.js"></script>
 	<script src="web/assets/js/navbar.js"></script>
-
+	<script src="web/assets/js/jquery.twbsPagination.js"></script>
 	<script src="web/vendor/jquery/jquery.min.js"></script>
 </body>
 </html>

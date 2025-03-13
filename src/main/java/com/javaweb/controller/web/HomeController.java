@@ -11,6 +11,9 @@ import com.javaweb.service.BuildingService;
 
 import com.javaweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,59 +44,97 @@ public class HomeController {
 	@Autowired
 	private BuildingSearchResponseConverter buildingSearchResponseConverter;
 
-//
-//	private ModelAndView setupModelAndView(String viewName, BuildingSearchRequest buildingSearchRequest) throws IOException {
-//		ModelAndView mav = new ModelAndView(viewName);
-//		mav.addObject("modelSearch", buildingSearchRequest);
-//
-//		// Xuống DB lấy dữ liệu
-//		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
-//		mav.addObject("buildingList", responseList);
-//		mav.addObject("listStaffs", userService.getStaffs());
-//		mav.addObject("districts", District.type());
-//		mav.addObject("typeCodes", TypeCode.type());
-//
-//		return mav;
-//	}
+
 
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
-	public ModelAndView homePage(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
-		ModelAndView mav = new ModelAndView("web/home");
-        mav.addObject("modelSearch", buildingSearchRequest);
-        //Xuong DB Lay Data ok roi
-        List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+	public ModelAndView homePage(
+			BuildingSearchRequest buildingSearchRequest,
+			@RequestParam(defaultValue = "1") int page, // Trang hiện tại, mặc định là 1
+			@RequestParam(defaultValue = "1") int size, // Số lượng sản phẩm trên mỗi trang, mặc định là 10
+			HttpServletRequest request) throws IOException {
 
-        mav.addObject("buildingList", responseList);
-        mav.addObject("listStaffs", userService.getStaffs());
-        mav.addObject("districts", District.type());
-        mav.addObject("typeCodes", TypeCode.type());
+		ModelAndView mav = new ModelAndView("/web/home");
+		mav.addObject("modelSearch", buildingSearchRequest);
+
+		// Phân trang dữ liệu
+		Pageable pageable = PageRequest.of(page - 1, size); // Pageable bắt đầu từ 0
+		Page<BuildingSearchResponse> responsePage = buildingService.findAll(buildingSearchRequest, pageable);
+
+		// Lấy danh sách sản phẩm và tổng số trang
+		List<BuildingSearchResponse> responseList = responsePage.getContent();
+		int totalPages = responsePage.getTotalPages();
+
+		// Thêm dữ liệu vào ModelAndView
+		mav.addObject("buildingList", responseList);
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("currentPage", page);
+		mav.addObject("pageSize", size);
+
+		mav.addObject("listStaffs", userService.getStaffs());
+		mav.addObject("districts", District.type());
+		mav.addObject("typeCodes", TypeCode.type());
+
 		return mav;
 	}
 
 	@GetMapping(value="/gioi-thieu")
-	public ModelAndView introduceBuilding(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException{
+	public ModelAndView introduceBuilding(BuildingSearchRequest buildingSearchRequest,
+										  @RequestParam(defaultValue = "1") int page, // Trang hiện tại, mặc định là 1
+										  @RequestParam(defaultValue = "1") int size,
+										  HttpServletRequest request) throws IOException{
 		ModelAndView mav = new ModelAndView("web/introduce");
 		mav.addObject("modelSearch", buildingSearchRequest);
-		//Xuong DB Lay Data ok roi
-		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+
+		// Phân trang dữ liệu
+		Pageable pageable = PageRequest.of(page - 1, size); // Pageable bắt đầu từ 0
+		Page<BuildingSearchResponse> responsePage = buildingService.findAll(buildingSearchRequest, pageable);
+
+		// Lấy danh sách sản phẩm và tổng số trang
+		List<BuildingSearchResponse> responseList = responsePage.getContent();
+		int totalPages = responsePage.getTotalPages();
+
+		// Thêm dữ liệu vào ModelAndView
 		mav.addObject("buildingList", responseList);
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("currentPage", page);
+		mav.addObject("pageSize", size);
+
 		mav.addObject("listStaffs", userService.getStaffs());
 		mav.addObject("districts", District.type());
 		mav.addObject("typeCodes", TypeCode.type());
+
 		return mav;
 	}
 
-	@GetMapping(value="/san-pham")
-	public ModelAndView buildingList(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
+	@GetMapping(value = "/san-pham")
+	public ModelAndView buildingList(
+			BuildingSearchRequest buildingSearchRequest,
+			@RequestParam(defaultValue = "1") int page, // Trang hiện tại, mặc định là 1
+			@RequestParam(defaultValue = "1") int size, // Số lượng sản phẩm trên mỗi trang, mặc định là 10
+			HttpServletRequest request) throws IOException {
+
 		ModelAndView mav = new ModelAndView("/web/list");
 		mav.addObject("modelSearch", buildingSearchRequest);
-		//Xuong DB Lay Data ok roi
-		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+
+		// Phân trang dữ liệu
+		Pageable pageable = PageRequest.of(page - 1, size); // Pageable bắt đầu từ 0
+		Page<BuildingSearchResponse> responsePage = buildingService.findAll(buildingSearchRequest, pageable);
+
+		// Lấy danh sách sản phẩm và tổng số trang
+		List<BuildingSearchResponse> responseList = responsePage.getContent();
+		int totalPages = responsePage.getTotalPages();
+
+		// Thêm dữ liệu vào ModelAndView
 		mav.addObject("buildingList", responseList);
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("currentPage", page);
+		mav.addObject("pageSize", size);
+
 		mav.addObject("listStaffs", userService.getStaffs());
 		mav.addObject("districts", District.type());
 		mav.addObject("typeCodes", TypeCode.type());
+
 		return mav;
 	}
 
@@ -101,24 +143,40 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/web/news");
 		mav.addObject("modelSearch", buildingSearchRequest);
 		//Xuong DB Lay Data ok roi
-		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
-		mav.addObject("buildingList", responseList);
-		mav.addObject("listStaffs", userService.getStaffs());
-		mav.addObject("districts", District.type());
-		mav.addObject("typeCodes", TypeCode.type());
+//		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+//		mav.addObject("buildingList", responseList);
+//		mav.addObject("listStaffs", userService.getStaffs());
+//		mav.addObject("districts", District.type());
+//		mav.addObject("typeCodes", TypeCode.type());
 		return mav;
 	}
 
 	@GetMapping(value="/lien-he")
-	public ModelAndView contact(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) throws IOException {
-		ModelAndView mav = new ModelAndView("/web/contact");
+	public ModelAndView contact(BuildingSearchRequest buildingSearchRequest,
+										  @RequestParam(defaultValue = "1") int page, // Trang hiện tại, mặc định là 1
+										  @RequestParam(defaultValue = "1") int size,
+										  HttpServletRequest request) throws IOException{
+		ModelAndView mav = new ModelAndView("web/contact");
 		mav.addObject("modelSearch", buildingSearchRequest);
-		//Xuong DB Lay Data ok roi
-		List<BuildingSearchResponse> responseList = buildingService.findAll(buildingSearchRequest);
+
+		// Phân trang dữ liệu
+		Pageable pageable = PageRequest.of(page - 1, size); // Pageable bắt đầu từ 0
+		Page<BuildingSearchResponse> responsePage = buildingService.findAll(buildingSearchRequest, pageable);
+
+		// Lấy danh sách sản phẩm và tổng số trang
+		List<BuildingSearchResponse> responseList = responsePage.getContent();
+		int totalPages = responsePage.getTotalPages();
+
+		// Thêm dữ liệu vào ModelAndView
 		mav.addObject("buildingList", responseList);
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("currentPage", page);
+		mav.addObject("pageSize", size);
+
 		mav.addObject("listStaffs", userService.getStaffs());
 		mav.addObject("districts", District.type());
 		mav.addObject("typeCodes", TypeCode.type());
+
 		return mav;
 	}
 

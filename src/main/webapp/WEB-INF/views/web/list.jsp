@@ -10,9 +10,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sản phẩm</title>
+
 </head>
 
+
 <body>
+<style>
+    .pagination {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .pagination a, .pagination span {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        color: #007bff;
+    }
+    .pagination a:hover {
+        background-color: #007bff;
+        color: white;
+    }
+    .pagination .current-page {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+    .pagination .ellipsis {
+        padding: 5px 10px;
+        margin: 0 5px;
+    }
+</style>
 <div class="product">
     <div class="container">
         <div class="row">
@@ -28,7 +57,7 @@
                             <option value="dien-tich-giam">Diện tích giảm dần</option>
                         </select>
                     </div>
-                    <div class="product__list-box">
+                    <div class="product__list-box" id="building-list">
                         <c:forEach var="item" items="${buildingList}">
                             <div class="product__item">
                                 <a href="">
@@ -42,7 +71,6 @@
                                                 ${item.name}
                                         </div>
                                     </a>
-
                                     <div class="product__item--content">
                                         <div class="product__item--price">
                                             <i class="las la-tags"></i>
@@ -67,14 +95,69 @@
                             </div>
                         </c:forEach>
                     </div>
-                    <div class="pagination-container">
-                        <div class="pagination" id="pagination">
-                            <button class="page-nav" id="prevPage">←</button>
-                            <div class="page-numbers" id="pageNumbers"></div>
-                            <button class="page-nav" id="nextPage">→</button>
-                        </div>
+
+                    <!-- Phần tử phân trang -->
+                    <div class="pagination">
+                        <!-- Nút "Đầu" và "Trước" -->
+                        <c:if test="${currentPage > 1}">
+                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}"/>">Đầu</a>
+                            <a href="<c:url value="/san-pham?page=${currentPage - 1}&maxPageItems=${pageSize}"/>">Trước</a>
+                        </c:if>
+
+                        <!-- Hiển thị các trang xung quanh trang hiện tại -->
+                        <c:set var="startPage" value="${currentPage - 2}"/>
+                        <c:set var="endPage" value="${currentPage + 2}"/>
+
+                        <c:if test="${startPage < 1}">
+                            <c:set var="startPage" value="1"/>
+                            <c:set var="endPage" value="5"/>
+                        </c:if>
+
+                        <c:if test="${endPage > totalPages}">
+                            <c:set var="endPage" value="${totalPages}"/>
+                            <c:set var="startPage" value="${totalPages - 4}"/>
+                            <c:if test="${startPage < 1}">
+                                <c:set var="startPage" value="1"/>
+                            </c:if>
+                        </c:if>
+
+                        <!-- Hiển thị trang đầu tiên và dấu "..." nếu cần -->
+                        <c:if test="${startPage > 1}">
+                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}"/>">1</a>
+                            <c:if test="${startPage > 2}">
+                                <span class="ellipsis">...</span>
+                            </c:if>
+                        </c:if>
+
+                        <!-- Hiển thị các trang xung quanh trang hiện tại -->
+                        <c:forEach begin="${startPage}" end="${endPage}" var="i">
+                            <c:choose>
+                                <c:when test="${i == currentPage}">
+                                    <span class="current-page">${i}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="<c:url value="/san-pham?page=${i}&maxPageItems=${pageSize}"/>">${i}</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
+                        <!-- Hiển thị dấu "..." và trang cuối cùng nếu cần -->
+                        <c:if test="${endPage < totalPages}">
+                            <c:if test="${endPage < totalPages - 1}">
+                                <span class="ellipsis">...</span>
+                            </c:if>
+                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}"/>">${totalPages}</a>
+                        </c:if>
+
+                        <!-- Nút "Sau" và "Cuối" -->
+                        <c:if test="${currentPage < totalPages}">
+                            <a href="<c:url value="/san-pham?page=${currentPage + 1}&maxPageItems=${pageSize}"/>">Sau</a>
+                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}"/>">Cuối</a>
+                        </c:if>
                     </div>
                 </div>
+                <p>Tổng số trang: ${totalPages}</p>
+                <p>Trang hiện tại: ${currentPage}</p>
 
             </div>
             <div class="col-xl-4 col-lg-4">
@@ -106,6 +189,19 @@
 </div>
 
 <script src="web/assets/js/Sort-Product.js">
+</script>
+<script>
+    $(document).ready(function () {
+        $('#pagination').twbsPagination({
+            totalPages: ${totalPages}, // Tổng số trang từ server
+            visiblePages: 5, // Số trang hiển thị
+            startPage: ${currentPage}, // Trang hiện tại
+            onPageClick: function (event, page) {
+                // Chuyển đến trang mới
+                window.location.href = "/san-pham?page=" + page;
+            }
+        });
+    });
 </script>
 </body>
 

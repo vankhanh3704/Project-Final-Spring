@@ -2,6 +2,7 @@ package com.javaweb.repository;
 
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.entity.RoleEntity;
+import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.repository.custom.BuildingRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,7 @@ public interface BuildingRepository extends JpaRepository<BuildingEntity,Long>, 
     void deleteById(Long id);
     void deleteByIdIn(List<Long> ids);
     int countTotalItem(BuildingSearchResponse buildingSearchResponse);
+    List<BuildingEntity> findAll(BuildingSearchRequest buildingSearchRequest);
 //    @Modifying
 //    @Query(value = "DELETE FROM assignmentbuilding WHERE buildingid = :buildingId", nativeQuery = true)
 //    public void deleteAssignmentsByBuildingId(@Param("buildingId") Long buildingId);

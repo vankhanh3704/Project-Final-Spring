@@ -11,9 +11,12 @@ import com.javaweb.repository.RoleRepository;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.service.IUserService;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +39,7 @@ public class UserService implements IUserService {
 
     @Autowired
     private UserConverter userConverter;
+
 
 
 
@@ -182,5 +186,38 @@ public class UserService implements IUserService {
             userEntity.setStatus(0);
             userRepository.save(userEntity);
         }
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    @Transactional
+    public boolean register(UserDTO userDTO) {
+            // Kiểm tra tài khoản đã tồn tại chưa
+            if (userRepository.existsByUserName(userDTO.getUserName())) {
+                return false;
+            }
+
+            // Chuyển đổi DTO sang Entity
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUserName(userDTO.getUserName());
+            userEntity.setFullName(userDTO.getFullName());
+            userEntity.setStatus(1);
+            RoleEntity defaultRole = roleRepository.findOneByCode("STAFF");
+            List<RoleEntity> roles = new ArrayList<>();
+            roles.add(defaultRole);
+            userEntity.setRoles(roles);
+            // Kiểm tra xem mật khẩu đã được mã hóa chưa
+            if (userDTO.getPassword().startsWith("$2a$")) {
+                // Mật khẩu đã được mã hóa, không cần mã hóa lại
+                userEntity.setPassword(userDTO.getPassword());
+            } else {
+                // Mã hóa mật khẩu nếu chưa được mã hóa
+                String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+                userEntity.setPassword(encodedPassword);
+            }
+
+            // Lưu vào database
+            userRepository.save(userEntity);
+            return true;
+
     }
 }

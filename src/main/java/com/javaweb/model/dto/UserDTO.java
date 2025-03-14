@@ -1,11 +1,16 @@
 package com.javaweb.model.dto;
 
+
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class UserDTO extends AbstractDTO {
+
     private String userName;
     private String fullName;
     private String password;

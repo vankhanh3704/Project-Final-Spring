@@ -4,6 +4,7 @@ import com.javaweb.converter.BuildingDTOConverter;
 import com.javaweb.converter.BuildingSearchResponseConverter;
 import com.javaweb.enums.District;
 import com.javaweb.enums.TypeCode;
+import com.javaweb.model.dto.UserDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.repository.BuildingRepository;
@@ -19,15 +20,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -204,6 +204,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
 	}
+
+
 
 	@RequestMapping(value = "/access-denied", method = RequestMethod.GET)
 	public ModelAndView accessDenied() {

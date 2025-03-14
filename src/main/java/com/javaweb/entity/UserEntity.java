@@ -1,11 +1,14 @@
 package com.javaweb.entity;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "userName")})
 public class UserEntity extends BaseEntity {
 
     private static final long serialVersionUID = -4988455421375043688L;
@@ -15,12 +18,15 @@ public class UserEntity extends BaseEntity {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
+    @NotEmpty(message = "Tên đăng nhập không được để trống")
     private String userName;
 
     @Column(name = "fullname", nullable = false)
+    @NotEmpty(message = "Họ và tên không được để trống")
     private String fullName;
 
     @Column(name = "password", nullable = false)
+    @NotEmpty(message = "Mật khẩu không được để trống")
     private String password;
 
     @Column(name = "status", nullable = false)

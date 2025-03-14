@@ -9,8 +9,9 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="login/login.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
-<body id="LoginForm" >
+<body id="LoginForm">
     <dec:body/>
+
 <script src="web/assets/js/login.js"></script>
 
 </body>

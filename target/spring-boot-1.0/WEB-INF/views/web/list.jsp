@@ -19,6 +19,8 @@
     .pagination {
         margin-top: 20px;
         text-align: center;
+        display: flex;
+        justify-content: flex-end;
     }
 
     .pagination a, .pagination span {
@@ -28,17 +30,19 @@
         border: 1px solid #ccc;
         text-decoration: none;
         color: #007bff;
+        border-radius: 5px;
     }
 
     .pagination a:hover {
-        background-color: #007bff;
+        background-color: #135fb4;
         color: white;
+        transition: 0.3s;
     }
 
     .pagination .current-page {
-        background-color: #007bff;
+        background-color: #135fb4;
         color: white;
-        border-color: #007bff;
+        border-color: #135fb4;
     }
 
     .pagination .ellipsis {
@@ -106,15 +110,12 @@
                             <c:set var="queryParams" value="${queryParams}&${entry.key}=${entry.value}"/>
                         </c:if>
                     </c:forEach>
-<%--                    <c:forEach var="i" begin="1" end="${totalPages}">--%>
-<%--                        <a href="<c:url value='/san-pham?page=${i}&size=${pageSize}&sort=${sort}'/>">${i}</a>--%>
-<%--                    </c:forEach>--%>
                     <!-- Phần tử phân trang -->
                     <div class="pagination">
                         <!-- Nút "Đầu" và "Trước" -->
                         <c:if test="${currentPage > 1}">
-                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}${queryParams}"/>">Đầu</a>
-                            <a href="<c:url value="/san-pham?page=${currentPage - 1}&maxPageItems=${pageSize}${queryParams}"/>">Trước</a>
+                            <a href="<c:url value="/san-pham?page=1&maxPageItems=${pageSize}${queryParams}"/>">«</a>
+                            <a href="<c:url value="/san-pham?page=${currentPage - 1}&maxPageItems=${pageSize}${queryParams}"/>">‹</a>
 
                         </c:if>
 
@@ -165,12 +166,11 @@
 
                         <!-- Nút "Sau" và "Cuối" -->
                         <c:if test="${currentPage < totalPages}">
-                            <a href="<c:url value="/san-pham?page=${currentPage + 1}&maxPageItems=${pageSize}${queryParams}"/>">Sau</a>
-                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}${queryParams}"/>">Cuối</a>
+                            <a href="<c:url value="/san-pham?page=${currentPage + 1}&maxPageItems=${pageSize}${queryParams}"/>">›</a>
+                            <a href="<c:url value="/san-pham?page=${totalPages}&maxPageItems=${pageSize}${queryParams}"/>">»</a>
                         </c:if>
                     </div>
                 </div>
-
 
             </div>
             <div class="col-xl-4 col-lg-4">

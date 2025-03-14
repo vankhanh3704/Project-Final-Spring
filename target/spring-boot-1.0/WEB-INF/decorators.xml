@@ -20,4 +20,9 @@
     <decorator name="login" page="login.jsp">
         <pattern>/login</pattern>
     </decorator>
+
+    <decorator name="register" page="register.jsp">
+        <pattern>/register</pattern>
+    </decorator>
+
 </decorators>

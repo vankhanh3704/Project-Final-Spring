@@ -26,40 +26,53 @@
                         </div>
                     </c:if>
                     <form:form id="formEdit" class="form-horizontal" modelAttribute="model">
-                        <div id="profile">
-                            <div class="form-group">
-                                <label class="col-xl-3 control-label no-padding-right">Vai trò</label>
-                                <div class="col-xl-6">
-                                    <form:select path="roleCode" id="roleCode" class="form-control">
-                                        <form:option value="" label="--- Chọn vai trò ---"/>
-                                        <form:options items="${model.roleDTOs}"/>
-                                    </form:select>
-                                </div>
+                    <div id="profile">
+                        <div class="form-group">
+                            <label class="col-xl-3 control-label no-padding-right">Vai trò</label>
+                            <div class="col-xl-6">
+                                <form:select path="roleCode" id="roleCode" class="form-control">
+                                    <form:option value="" label="--- Chọn vai trò ---"/>
+                                    <form:options items="${model.roleDTOs}"/>
+                                </form:select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-xl-3 control-label no-padding-right">
-                                    Tên đăng nhập
-                                </label>
-                                <div class="col-xl-6">
-                                    <c:if test="${not empty model.id}">
-                                        <form:input path="userName" id="userName" cssClass="form-control"
-                                                    disabled="true"/>
-                                    </c:if>
-                                    <c:if test="${empty model.id}">
-                                        <form:input path="userName" id="userName" cssClass="form-control"/>
-                                    </c:if>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xl-3 control-label no-padding-right">
+                                Tên đăng nhập
+                            </label>
+                            <div class="col-xl-6">
+                                <c:if test="${not empty model.id}">
+                                    <form:input path="userName" id="userName" cssClass="form-control"
+                                                disabled="true"/>
+                                </c:if>
+                                <c:if test="${empty model.id}">
+                                    <form:input path="userName" id="userName" cssClass="form-control"/>
+                                </c:if>
                             </div>
-                            <div class="form-group">
-                                <label class="col-xl-3 control-label no-padding-right">
-                                        <%--<spring:message code="label.fullname"/>--%>
-                                    Tên đầy đủ
-                                </label>
-                                <div class="col-xl-6">
-                                    <form:input path="fullName" id="fullName" cssClass="form-control"/>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xl-3 control-label no-padding-right">
+                                    <%--<spring:message code="label.fullname"/>--%>
+                                Tên đầy đủ
+                            </label>
+                            <div class="col-xl-6">
+                                <form:input path="fullName" id="fullName" cssClass="form-control"/>
                             </div>
-
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                Mật khẩu
+                            </label>
+                            <div class="col-xl-6">
+                                <c:if test="${not empty model.id}">
+                                    <form:input path="password" id="userName" cssClass="form-control" type="password"/>
+                                </c:if>
+                                <c:if test="${empty model.id}">
+                                    <form:input path="password" id="userName" cssClass="form-control" type="password"/>
+                                </c:if>
+                            </div>
+                        </div>
+                            <img src="${pageContext.request.contextPath}/img/loading.gif" style="display: none; height: 100px" id="loading_image">
                             <!--Btn-->
                             <div class="col-xl-12 flex-end">
                                 <c:if test="${not empty model.id}">
@@ -67,24 +80,23 @@
                                            value="Cập nhật người dùng" id="btnAddOrUpdateUsers"/>
                                     <input type="button" class="btn btn-white btn-info btn-bold"
                                            value="Reset mật khẩu" id="btnResetPassword"/>
-                                    <img src="/img/loading.gif" style="display: none; height: 100px" id="loading_image">
+<%--                                    <img src="${pageContext.request.contextPath}/img/loading.gif" style="display: none; height: 100px" id="loading_image">--%>
                                 </c:if>
                                 <c:if test="${empty model.id}">
                                     <input type="button" class="btn btn-white btn-warning btn-bold"
                                            value="Thêm mới người dùng" id="btnAddOrUpdateUsers"/>
-                                    <img src="/img/loading.gif" style="display: none; height: 100px" id="loading_image">
+<%--                                    <img src="${pageContext.request.contextPath}/img/loading.gif" style="display: none; height: 100px" id="loading_image">--%>
                                 </c:if>
                             </div>
                             <!--Btn-->
                             <form:hidden path="id" id="userId"/>
                         </div>
-                    </form:form>
+                        </form:form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </main>
-</body>
 <script>
     $("#btnAddOrUpdateUsers").click(function (event) {
         event.preventDefault();

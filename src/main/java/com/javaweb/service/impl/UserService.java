@@ -188,23 +188,27 @@ public class UserService implements IUserService {
         }
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    @Override
     @Transactional
-    public boolean register(UserDTO userDTO) {
+    public UserDTO register(UserDTO userDTO) {
             // Kiểm tra tài khoản đã tồn tại chưa
             if (userRepository.existsByUserName(userDTO.getUserName())) {
-                return false;
+                throw new IllegalArgumentException("Tên đăng nhập đã tồn tại.");
             }
+            // Kiểm tra password và rePassword có khớp nhau không
+            if (!userDTO.getPassword().equals(userDTO.getRePassword())) {
+                throw new IllegalArgumentException("Không khớp mật khẩu.");
+            }
+            userDTO.setRoleCode("STAFF");
+            userDTO.setStatus(1);
+            userDTO.setFullName(userDTO.getUserName());
 
             // Chuyển đổi DTO sang Entity
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUserName(userDTO.getUserName());
+            UserEntity userEntity = userConverter.convertToEntity(userDTO);
+            RoleEntity role = roleRepository.findOneByCode(userDTO.getRoleCode());
+            userEntity.setRoles(Stream.of(role).collect(Collectors.toList()));
+            userEntity.setStatus(userDTO.getStatus());
             userEntity.setFullName(userDTO.getFullName());
-            userEntity.setStatus(1);
-            RoleEntity defaultRole = roleRepository.findOneByCode("STAFF");
-            List<RoleEntity> roles = new ArrayList<>();
-            roles.add(defaultRole);
-            userEntity.setRoles(roles);
             // Kiểm tra xem mật khẩu đã được mã hóa chưa
             if (userDTO.getPassword().startsWith("$2a$")) {
                 // Mật khẩu đã được mã hóa, không cần mã hóa lại
@@ -216,8 +220,7 @@ public class UserService implements IUserService {
             }
 
             // Lưu vào database
-            userRepository.save(userEntity);
-            return true;
+            return userConverter.convertToDto(userRepository.save(userEntity));
 
     }
 }

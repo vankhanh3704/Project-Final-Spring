@@ -19,10 +19,7 @@
             <c:if test="${param.registrationSuccess != null}">
                 <div class="alert alert-success">Đăng ký thành công! Vui lòng đăng nhập.</div>
             </c:if>
-        <div class="input-box">
-           <form:input class="input" path="fullName" id="fullName" required="true" placeholder="Họ và tên"/>
-            <form:errors path="fullName" cssClass="error" />
-        </div>
+
         <div class="input-box">
             <form:input class="input" path="userName" id="userName" required="true" placeholder="Tài khoản"/>
                 <form:errors path="userName" cssClass="error" />
@@ -30,6 +27,10 @@
         <div class="input-box">
             <form:input class="input" path="password" id="password" type="password" required="true" placeholder="Mật khẩu"/>
             <form:errors path="password" cssClass="error" />
+        </div>
+        <div class="input-box">
+            <form:input class="input" path="rePassword" id="password" type="password" required="true" placeholder="Nhập lại mật khẩu"/>
+            <form:errors path="rePassword" cssClass="error" />
         </div>
         <div class="input-box button">
             <input type="Submit" value="Đăng ký">
@@ -39,7 +40,6 @@
         </div>
     </form:form>
 </div>
-    <!-- Form đăng ký -->
 
 </body>
 </html>

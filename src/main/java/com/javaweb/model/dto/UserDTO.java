@@ -18,10 +18,19 @@ public class UserDTO extends AbstractDTO {
     private List<RoleDTO> roles = new ArrayList<>();
     private String roleName;
     private String roleCode;
+    private String rePassword;
     private Map<String,String> roleDTOs = new HashMap<>();
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getRePassword() {
+        return rePassword;
+    }
+
+    public void setRePassword(String rePassword) {
+        this.rePassword = rePassword;
     }
 
     public void setUserName(String userName) {

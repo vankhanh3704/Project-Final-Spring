@@ -116,9 +116,9 @@
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (res) {
-                if (res == 'update_success') {
+                if (res === 'update_success') {
                     window.location.href = "<c:url value='/admin/profile-password?message=update_success'/>";
-                } else if (res == 'change_password_fail') {
+                } else if (res === 'change_password_fail') {
                     window.location.href = "<c:url value='/admin/profile-password?message=change_password_fail'/>";
                 }
             },

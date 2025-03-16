@@ -67,7 +67,7 @@
         event.preventDefault();
         var dataArray = {};
         dataArray["fullName"] = $('#fullName').val();
-        if ($('#userId').val() != "") {
+        if ($('#userId').val() !== "") {
             updateInfo(dataArray, $('#userName').val());
         }
     });
@@ -89,6 +89,5 @@
         });
     }
 </script>
-</div>
 </body>
 </html>

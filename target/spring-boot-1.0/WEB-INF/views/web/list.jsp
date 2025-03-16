@@ -29,10 +29,16 @@
                         <div class="product__content--title" style="margin-top: 0;">Danh sách sản phẩm</div>
                         <select name="" id="filter" class="product__content--sort">
                             <option value="mac-dinh" ${sort == null ? 'selected' : ''}>-- Mặc định --</option>
-                            <option value="thap-cao" ${sort == 'thap-cao' ? 'selected' : ''}>Giá từ thấp tới cao</option>
-                            <option value="cao-thap" ${sort == 'cao-thap' ? 'selected' : ''}>Giá từ cao tới thấp</option>
-                            <option value="dien-tich-tang" ${sort == 'dien-tich-tang' ? 'selected' : ''}>Diện tích tăng dần</option>
-                            <option value="dien-tich-giam" ${sort == 'dien-tich-giam' ? 'selected' : ''}>Diện tích giảm dần</option>
+                            <option value="thap-cao" ${sort == 'thap-cao' ? 'selected' : ''}>Giá từ thấp tới cao
+                            </option>
+                            <option value="cao-thap" ${sort == 'cao-thap' ? 'selected' : ''}>Giá từ cao tới thấp
+                            </option>
+                            <option value="dien-tich-tang" ${sort == 'dien-tich-tang' ? 'selected' : ''}>Diện tích tăng
+                                dần
+                            </option>
+                            <option value="dien-tich-giam" ${sort == 'dien-tich-giam' ? 'selected' : ''}>Diện tích giảm
+                                dần
+                            </option>
                         </select>
                     </div>
                     <div class="product__list-box" id="building-list">
@@ -147,10 +153,8 @@
                     <div class="pn-sidebar__title">
                         Tìm kiếm BĐS
                     </div>
-                    <form:form modelAttribute="modelSearch" id="listForm" action="${productListURL}" method="GET"
-                               class="pn-sidebar__form">
-                        <form:input path="name" placeholder="Nhập tên BĐS"
-                        />
+                    <form:form modelAttribute="modelSearch" id="listForm" action="${productListURL}" method="GET" class="pn-sidebar__form">
+                        <form:input path="name" placeholder="Nhập tên BĐS"/>
                         <form:select path="district">
                             <form:option value="">---Chọn tỉnh---</form:option>
                             <form:options items="${districts}"></form:options>

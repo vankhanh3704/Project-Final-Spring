@@ -98,7 +98,7 @@
                                                     </div>
                                                     <div class="col-xl-3">
                                                         <label class="name">Giá thuê đến</label>
-                                                        <input type="number" class="form-control" name="rentPriceTo">
+                                                        <form:input type="number" class="form-control" path="rentPriceto"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,19 +106,19 @@
                                                 <div class="form-group">
                                                     <div class="col-xl-3">
                                                         <label class="name">Mô tả giá</label>
-                                                        <input type="text" class="form-control" name="rentpricedescription">
+                                                        <form:input type="text" class="form-control" path="rentPriceDescription"/>
                                                     </div>
                                                     <div class="col-xl-3">
                                                         <label class="name">Phí dịch vụ</label>
-                                                        <input type="number" class="form-control" name="servicefee">
+                                                        <form:input type="number" class="form-control" path="serviceFee"/>
                                                     </div>
                                                     <div class="col-xl-3">
                                                         <label class="name">Phí ô tô</label>
-                                                        <input type="number" class="form-control" name="carfee">
+                                                        <form:input type="number" class="form-control" path="carFee"/>
                                                     </div>
                                                     <div class="col-xl-3">
                                                         <label class="name">Phí mô tô</label>
-                                                        <input type="number" class="form-control" name="motorbikefee">
+                                                        <form:input type="number" class="form-control" path="motorbikeFee"/>
                                                     </div>
                                                 </div>
                                             </div>

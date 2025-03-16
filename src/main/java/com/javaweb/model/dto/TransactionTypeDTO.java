@@ -1,6 +1,11 @@
 package com.javaweb.model.dto;
 
-public class TransactionTypeDTO extends AbstractDTO
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class TransactionTypeDTO extends AbstractDTO<TransactionTypeDTO>
 {
     private Long id;
     private String code;
@@ -12,31 +17,5 @@ public class TransactionTypeDTO extends AbstractDTO
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
 }

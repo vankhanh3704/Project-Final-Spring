@@ -20,7 +20,7 @@ public class BuildingDTOtoEntityConverter {
         String[] a=rentAreaStr.trim().split(",");
         ArrayList<RentAreaEntity> rentAreaEntities = new ArrayList<>();
         for(String x:a){
-            if(x.trim()!="") {
+            if(!x.trim().isEmpty()) {
                 RentAreaEntity renttmp = new RentAreaEntity();
                 renttmp.setValue(x.trim());
                 renttmp.setBuilding(buildingEntity);

@@ -1,6 +1,5 @@
 package com.javaweb.controller.web;
 
-import com.javaweb.converter.BuildingDTOConverter;
 import com.javaweb.converter.BuildingSearchResponseConverter;
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.enums.District;
@@ -11,7 +10,8 @@ import com.javaweb.repository.BuildingRepository;
 import com.javaweb.service.BuildingService;
 
 import com.javaweb.service.IUserService;
-import org.apache.tomcat.util.codec.binary.Base64;
+import com.javaweb.utils.strategy.SortingStrategy;
+import com.javaweb.utils.strategy.SortingStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,12 +28,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
+
+    private static final Map<String, SortingStrategy> sortStrategyMap = new HashMap<>();
 
     @Autowired
     private BuildingRepository buildingRepository;
@@ -77,23 +79,9 @@ public class HomeController {
 
         ModelAndView mav = new ModelAndView("/web/list");
         mav.addObject("modelSearch", buildingSearchRequest);
-        Sort sorting = Sort.unsorted(); // Mặc định không sắp xếp
-        if (sort != null) {
-            switch (sort) {
-                case "thap-cao":
-                    sorting = Sort.by(Sort.Direction.ASC, "rentPrice"); // Giá từ thấp đến cao
-                    break;
-                case "cao-thap":
-                    sorting = Sort.by(Sort.Direction.DESC, "rentPrice"); // Giá từ cao đến thấp
-                    break;
-                case "dien-tich-tang":
-                    sorting = Sort.by(Sort.Direction.ASC, "floorArea"); // Diện tích tăng dần
-                    break;
-                case "dien-tich-giam":
-                    sorting = Sort.by(Sort.Direction.DESC, "floorArea"); // Diện tích giảm dần
-                    break;
-            }
-        }
+
+        SortingStrategy sortingStrategy = SortingStrategyFactory.getStrategy(sort);
+        Sort sorting = sortingStrategy.getSort();
 
         // Phân trang dữ liệu
         Pageable pageable = PageRequest.of(page - 1, size, sorting); // Pageable bắt đầu từ 0
@@ -143,20 +131,10 @@ public class HomeController {
         ModelAndView mav = new ModelAndView("/web/detail");
         BuildingEntity buildingEntity = buildingRepository.findById(id).get();
         BuildingSearchResponse buildingSearchResponse = buildingSearchResponseConverter.toBuildingSearchResponse(buildingEntity);
-        if (buildingSearchResponse.getImage() != null && !buildingSearchResponse.getImage().isEmpty()) {
-            String base64Image = null;
-            try {
-                base64Image = Base64.encodeBase64String(Files.readAllBytes(Paths.get("/Users/hoangkhanhvan/Desktop/" + buildingSearchResponse.getImage())));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            buildingSearchResponse.setImageBase64(base64Image);
-        }
         BuildingSearchRequest modelSearch = new BuildingSearchRequest();
         mav.addObject("modelSearch", modelSearch);
         mav.addObject("districts", District.type());
         mav.addObject("typeCodes", TypeCode.type());
-
         mav.addObject("building", buildingSearchResponse);
         return mav;
     }

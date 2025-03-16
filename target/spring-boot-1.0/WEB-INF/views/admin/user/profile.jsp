@@ -16,7 +16,7 @@
         </div>
         <div class="page-content">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xl-12">
                     <c:if test="${not empty messageResponse}">
                         <div class="alert alert-block alert-${alert}">
                             <button type="button" class="close" data-dismiss="alert">
@@ -29,27 +29,27 @@
                         <form:form id="formEdit" class="form-horizontal" modelAttribute="model">
                             <div class="space-4"></div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right">
+                                <label class="col-xl-3 control-label no-padding-right">
                                         <%--<spring:message code="label.username"/>--%>
                                     Tên đăng nhập
                                 </label>
-                                <div class="col-sm-9">
+                                <div class="col-xl-6">
                                     <form:input path="userName" id="userName" cssClass="form-control" disabled="true"/>
                                 </div>
                             </div>
                             <div class="space-4"></div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right">
+                                <label class="col-xl-3 control-label no-padding-right">
                                         <%--<spring:message code="label.fullname"/>--%>
                                     Tên đầy đủ
                                 </label>
-                                <div class="col-sm-9">
+                                <div class="col-xl-6">
                                     <form:input path="fullName" id="fullName" cssClass="form-control"/>
                                 </div>
                             </div>
                             <!--Btn-->
-                            <div class="col-sm-12">
-                                <label class="col-sm-3 control-label no-padding-right message-info"></label>
+                            <div class="col-xl-12">
+                                <label class="col-xl-3 control-label no-padding-right message-info"></label>
                                 <input type="button" class="btn btn-white btn-warning btn-bold"
                                        value="Cập nhật người dùng" id="btnUpdateUser"/>
                             </div>

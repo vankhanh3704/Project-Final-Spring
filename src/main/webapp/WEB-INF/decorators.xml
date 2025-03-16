@@ -25,4 +25,7 @@
         <pattern>/register</pattern>
     </decorator>
 
+    <decorator name="detail" page="detail.jsp">
+        <pattern>/detail</pattern>
+    </decorator>
 </decorators>

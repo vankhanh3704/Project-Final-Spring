@@ -20,6 +20,7 @@
 	<link href="web/assets/css/introduce.css" rel="stylesheet" type="text/css">
 	<link href="web/assets/css/product.css" rel="stylesheet" type="text/css">
 	<link href="web/assets/css/contact.css" rel="stylesheet" type="text/css">
+	<link href="web/assets/css/detail.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<!-- Navigation -->

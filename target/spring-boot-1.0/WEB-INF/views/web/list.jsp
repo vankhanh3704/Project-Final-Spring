@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
+<c:url var="productListURL" value="/san-pham"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sản phẩm</title>
@@ -16,39 +17,7 @@
 
 <body>
 <style>
-    .pagination {
-        margin-top: 20px;
-        text-align: center;
-        display: flex;
-        justify-content: flex-end;
-    }
 
-    .pagination a, .pagination span {
-        display: inline-block;
-        padding: 5px 10px;
-        margin: 0 5px;
-        border: 1px solid #ccc;
-        text-decoration: none;
-        color: #007bff;
-        border-radius: 5px;
-    }
-
-    .pagination a:hover {
-        background-color: #135fb4;
-        color: white;
-        transition: 0.3s;
-    }
-
-    .pagination .current-page {
-        background-color: #135fb4;
-        color: white;
-        border-color: #135fb4;
-    }
-
-    .pagination .ellipsis {
-        padding: 5px 10px;
-        margin: 0 5px;
-    }
 </style>
 <div class="product">
     <div class="container">
@@ -69,13 +38,13 @@
                     <div class="product__list-box" id="building-list">
                         <c:forEach var="item" items="${buildingList}">
                             <div class="product__item">
-                                <a href="">
+                                <a href="<c:url value="/detail-${item.id}"/>">
                                     <div class="product__item--image">
                                         <img src="data:image/jpeg;base64,${item.imageBase64}" alt="Building Image"/>
                                     </div>
                                 </a>
                                 <div class="product__item--list">
-                                    <a href="">
+                                    <a href="<c:url value="/detail-${item.id}"/>">
                                         <div class="product__item--title">
                                                 ${item.name}
                                         </div>

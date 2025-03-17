@@ -1,11 +1,16 @@
 package com.javaweb.entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "role")
+@Data
 public class RoleEntity extends BaseEntity {
 
     private static final long serialVersionUID = -6525302831793188081L;
@@ -19,9 +24,6 @@ public class RoleEntity extends BaseEntity {
     @Column(name="code")
     private String code;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     @Override
     public Long getId() {
@@ -39,21 +41,6 @@ public class RoleEntity extends BaseEntity {
 //    @OneToMany(mappedBy="roles",fetch = FetchType.LAZY)
 //    private List<UserRoleEntity> userRoleEntities = new ArrayList<>();
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public List<UserEntity> getUsers() {
         return user;

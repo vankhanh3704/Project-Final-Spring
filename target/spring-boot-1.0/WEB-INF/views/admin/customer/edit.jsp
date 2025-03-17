@@ -65,7 +65,7 @@
                                                 <div class="col-xs-9">
                                                     <form:select class="form-control" path="status">
                                                         <form:option value="">---Chọn Tình Trạng---</form:option>
-                                                        <form:options items="${statuss}"></form:options>
+                                                        <form:options items="${status}"/>
                                                     </form:select>
                                                 </div>
                                             </div>

@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class HomeController {
 
     @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
     public ModelAndView homePage(
-            BuildingSearchRequest buildingSearchRequest) {
+            @ModelAttribute BuildingSearchRequest buildingSearchRequest) {
 
         ModelAndView mav = new ModelAndView("/web/home");
         mav.addObject("modelSearch", buildingSearchRequest);
@@ -59,7 +60,7 @@ public class HomeController {
     }
 
     @GetMapping(value = "/gioi-thieu")
-    public ModelAndView introduceBuilding(BuildingSearchRequest buildingSearchRequest) {
+    public ModelAndView introduceBuilding(@ModelAttribute BuildingSearchRequest buildingSearchRequest) {
         ModelAndView mav = new ModelAndView("web/introduce");
         mav.addObject("modelSearch", buildingSearchRequest);
         mav.addObject("districts", District.type());
@@ -71,7 +72,7 @@ public class HomeController {
 
     @GetMapping(value = "/san-pham")
     public ModelAndView buildingList(
-            BuildingSearchRequest buildingSearchRequest,
+            @ModelAttribute BuildingSearchRequest buildingSearchRequest,
             @RequestParam(defaultValue = "1") int page, // Trang hiện tại, mặc định là 1
             @RequestParam(defaultValue = "2") int size, // Số lượng sản phẩm trên mỗi trang, mặc định là 10
             @RequestParam(required = false) String sort,
@@ -118,7 +119,7 @@ public class HomeController {
 //	}
 
     @GetMapping(value = "/lien-he")
-    public ModelAndView contact(BuildingSearchRequest buildingSearchRequest) {
+    public ModelAndView contact(@ModelAttribute BuildingSearchRequest buildingSearchRequest) {
         ModelAndView mav = new ModelAndView("web/contact");
         mav.addObject("modelSearch", buildingSearchRequest);
         mav.addObject("districts", District.type());

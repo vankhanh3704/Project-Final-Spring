@@ -1,8 +1,13 @@
 package com.javaweb.entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
+@Data
 @Table(name = "transaction")
 public class TransactionTypeEntity extends BaseEntity
 {
@@ -30,27 +35,5 @@ public class TransactionTypeEntity extends BaseEntity
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public CustomerEntity getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerEntity customer) {
-        this.customer = customer;
-    }
+   
 }

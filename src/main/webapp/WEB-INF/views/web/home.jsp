@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 <c:url var="productListURL" value="/san-pham"/>
+<c:url var="buildingAPI" value="/api/home"></c:url>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -80,7 +81,7 @@
         <div class="row">
             <div class="col-12">
                 <div id="expandBtn">Mở rộng <i class="fa-solid fa-angle-down"></i></div>
-                <a href="/product.html" id="loadMoreBtn" style="display: none;">Xem tiếp <i
+                <a href="<c:url value="/san-pham"/>" id="loadMoreBtn" style="display: none;">Xem tiếp <i
                         class="fa-solid fa-angle-down"></i></a>
             </div>
         </div>
@@ -281,6 +282,7 @@
         e.preventDefault();
         $('#listForm').submit();
     })
+
 
 </script>
 </body>

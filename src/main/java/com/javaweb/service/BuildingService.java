@@ -20,5 +20,5 @@ public interface BuildingService {
     BuildingDTO addOrUpdateBuilding(BuildingDTO buildingDTO);
     ResponseDTO updateAssignmentBuilding(AssignmentBuildingDTO assignmentBuildingDTO);
     int countTotalItem(List<BuildingSearchResponse> list);
-
+    List<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest) throws IOException;
 }

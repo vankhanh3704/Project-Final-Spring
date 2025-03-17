@@ -18,6 +18,7 @@ public class BuildingSearchResponse extends AbstractDTO {
 	private String rentArea;
     private String emptyArea;
 	private String structure;
+	private String level;
     private Long rentPrice;
     private String serviceFee;
     private Double brokerageFee;

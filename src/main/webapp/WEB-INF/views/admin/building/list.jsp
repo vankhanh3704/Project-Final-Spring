@@ -42,19 +42,19 @@
                                             <form:input class="form-control" path="name"/>
                                         </div>
                                         <div class="col-xl-6">
-                                            <label class="name">Tỉnh/Thành phố</label>
-                                            <form:select class="form-control" path="district">
-                                                <form:option value="">---Chọn quận---</form:option>
-                                                <form:options items="${districts}"></form:options>
-                                            </form:select>
+                                             <label class="name">Diện tích sàn</label>
+                                            <form:input class="form-control" path="floorArea"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="form-group">
                                         <div class="col-xl-4">
-                                            <label class="name">Quận/Huyện</label>
-                                            <form:input class="form-control" path=""/>
+                                            <label class="name">Chọn Quận/Huyện</label>
+                                            <form:select class="form-control" path="district">
+                                                <form:option value="">---Chọn quận---</form:option>
+                                                <form:options items="${districts}"></form:options>
+                                            </form:select>
                                         </div>
                                         <div class="col-xl-4">
                                             <label class="name">Phường/Xã</label>
@@ -68,19 +68,15 @@
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="form-group">
-                                        <div class="col-xl-3">
-                                            <label class="name">Diện tích sàn</label>
-                                            <form:input class="form-control" path="floorArea"/>
-                                        </div>
-                                        <div class="col-xl-3">
+                                        <div class="col-xl-4">
                                             <label class="name">Số tầng hầm</label>
                                             <form:input class="form-control" path="numberOfBasement"/>
                                         </div>
-                                        <div class="col-xl-3">
+                                        <div class="col-xl-4">
                                             <label class="name">Hướng</label>
                                             <form:input class="form-control" path="direction"/>
                                         </div>
-                                        <div class="col-xl-3">
+                                        <div class="col-xl-4">
                                             <label class="name">Hạng</label>
                                             <form:input class="form-control" path="level"/>
                                         </div>

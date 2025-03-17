@@ -135,6 +135,21 @@ public class BuildingServiceImpl implements BuildingService {
         // Trả về đối tượng Page
         return new PageImpl<>(pageContent, pageable, total);
     }
+    @Override
+    public List<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest) throws IOException {
+        List<BuildingEntity> buildingEntities = buildingRepository.findAll(buildingSearchRequest);
+        List<BuildingSearchResponse> result = new ArrayList<>();
+        for(BuildingEntity item: buildingEntities) {
+            BuildingSearchResponse building = buildingSearchResponseConverter.toBuildingSearchResponse(item);
+            if (item.getImage() != null) {
+                String base64Image = Base64.encodeBase64String(Files.readAllBytes(Paths.get("/Users/hoangkhanhvan/Desktop/" + item.getImage())));
+                building.setImageBase64(base64Image);
+            }
+            result.add(building);
+
+        }
+        return result;
+    }
 
 
     @Transactional
@@ -145,9 +160,9 @@ public class BuildingServiceImpl implements BuildingService {
 
 
     @Override
+    @Transactional
     public BuildingDTO addOrUpdateBuilding(BuildingDTO buildingDTO) {
 
-        if(!checkAddBuilding(buildingDTO)) return null;
         BuildingEntity buildingEntity = buildingDTOtoEntityConverter.toBuildingEntity(buildingDTO);
 
         // update
@@ -206,16 +221,4 @@ public class BuildingServiceImpl implements BuildingService {
         return res;
     }
 
-    public static boolean checkAddBuilding(BuildingDTO buildingDTO)
-    {
-        if(!StringUtils.check(buildingDTO.getName())) return false;
-        if(!StringUtils.check(buildingDTO.getDistrict())) return false;
-        if(!StringUtils.check(buildingDTO.getWard())) return false;
-        if(!StringUtils.check(buildingDTO.getStreet())) return false;
-        if(!StringUtils.check(buildingDTO.getRentArea())) return false;
-        if(!StringUtils.check(buildingDTO.getRentPriceDescription())) return false;
-        if(!NumberUtils.checkNumber(buildingDTO.getNumberOfBasement())) return false;
-        if(!NumberUtils.checkNumber(buildingDTO.getFloorArea())) return false;
-        return NumberUtils.checkNumber(buildingDTO.getRentPrice());
-    }
 }

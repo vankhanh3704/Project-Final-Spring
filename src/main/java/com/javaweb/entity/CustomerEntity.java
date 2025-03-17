@@ -1,11 +1,16 @@
 package com.javaweb.entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "customer")
+@Data
 public class CustomerEntity extends BaseEntity
 {
     @Id
@@ -33,40 +38,8 @@ public class CustomerEntity extends BaseEntity
     @Column(name = "demand")
     private String note;
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(String isActive) {
-        this.isActive = isActive;
-    }
-
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<TransactionTypeEntity> transactionTypes = new ArrayList<>();
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     @ManyToMany
     @JoinTable(name = "assignmentcustomer",
@@ -84,43 +57,5 @@ public class CustomerEntity extends BaseEntity
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<UserEntity> getUserEntities() {
-        return userEntities;
-    }
-
-    public void setUserEntities(List<UserEntity> userEntities) {
-        this.userEntities = userEntities;
-    }
-
-    public List<TransactionTypeEntity> getTransactionTypes() {
-        return transactionTypes;
-    }
-
-    public void setTransactionTypes(List<TransactionTypeEntity> transactionTypes) {
-        this.transactionTypes = transactionTypes;
-    }
 }

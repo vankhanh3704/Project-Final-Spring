@@ -7,7 +7,7 @@
     </script>
     <div class="sidebar-brand">
         <h2>
-            <a href="/trang-chu" style="color: #fff;">
+            <a href="<c:url value="/trang-chu"/>" style="color: #fff;">
                     <span class="las la-home">
                     </span>
                 <span>Trang chủ</span>

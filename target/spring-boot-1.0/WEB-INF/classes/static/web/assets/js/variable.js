@@ -3,159 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconLoadMore = document.querySelector("#loadMoreBtn i")
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     const content = document.getElementById('content');
-    console.log(loadMoreBtn);
-    // Dữ liệu mẫu từ API hoặc cơ sở dữ liệu
-    const data = [
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        {
-            image: 'web/assets/images/building-1.jpg',
-            label: 'VIP',
-            title: 'Bán CH giá tốt view sông đẹp tại Q7',
-            price: '2,97 tỷ',
-            area: '67 m²',
-            address: 'Quận 7, Hồ Chí Minh'
-        },
-        // ... Thêm các đối tượng dữ liệu khác
-    ];
-
+    let data = []; // Khai báo mảng để lưu dữ liệu từ API
     let itemsToShow = 8;
     let currentIndex = 0;
 
+    async function fetchData() {
+        try {
+            const response = await fetch('/api/home'); // Thay bằng API thực tế
+            if (!response.ok) {
+                throw new Error('Lỗi khi lấy dữ liệu từ API');
+            }
+            data = await response.json(); // Chuyển đổi dữ liệu JSON
+            renderBoxes(); // Gọi hàm để hiển thị dữ liệu
+        } catch (error) {
+            console.error('Lỗi:', error);
+        }
+    }
     function renderBoxes() {
         const fragment = document.createDocumentFragment(); // Tạo một DocumentFragment để thêm các phần tử mới
         for (let i = currentIndex; i < currentIndex + itemsToShow && i < data.length; i++) {
@@ -169,17 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
             newBox.innerHTML = `
                 <a class="mua-ban-bds__box" href="#">
                     <div class="mua-ban-bds__image">
-                        <img src="${boxData.image}" alt="">
-                        <div class="mua-ban-bds__image--label">${boxData.label}</div>
+                        <img src="data:image/jpeg;base64,${boxData.imageBase64}" alt="" style="min-height: 170px">
+                        <div class="mua-ban-bds__image--label">${boxData.level}</div>
                     </div>
                     <div class="mua-ban-bds__content">
                         <div class="mua-ban-bds__content--title">
-                            ${boxData.title}
+                            ${boxData.name}
                         </div>
                         <div class="mua-ban-bds__content-stat">
-                            <span class="mua-ban-bds__content-stat-price">${boxData.price}</span>
+                            <span class="mua-ban-bds__content-stat-price">${boxData.rentPrice}</span>
                             <span class="mua-ban-bds__content-stat-dot"> · </span>
-                            <span class="mua-ban-bds__content-stat-area">${boxData.area}</span>
+                            <span class="mua-ban-bds__content-stat-area">${boxData.rentArea}</span>
                         </div>
                         <div class="mua-ban-bds__content-address">
                             <i class="fa-solid fa-location-dot"></i> ${boxData.address}
@@ -210,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('loadMoreBtn.style.display:', loadMoreBtn.style.display);
     }
 
-    renderBoxes();
+    fetchData();
 
     expandBtn.addEventListener('click', () => {
         renderBoxes();

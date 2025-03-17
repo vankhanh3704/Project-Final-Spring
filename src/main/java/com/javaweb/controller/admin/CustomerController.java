@@ -62,7 +62,7 @@ public class CustomerController
     public ModelAndView customerEdit(@ModelAttribute("customerEdit") CustomerDTO customerDTO, HttpServletRequest request)
     {
         ModelAndView mav = new ModelAndView("admin/customer/edit");
-        mav.addObject("statuss", Status.type());
+        mav.addObject("status", Status.type());
         return mav;
     }
 
